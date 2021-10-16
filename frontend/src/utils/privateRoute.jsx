@@ -1,12 +1,12 @@
 import { Route, Redirect } from "react-router-dom";
 import { getAuth } from "./auth";
 
-const PrivateRoute = ({ children: Component, ...rest }, redirect) => {
+const PrivateRoute = ({ comp: Component, redirect, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) =>
-        getAuth().user.token ? (
+        getAuth()?.user?.token ? (
           <Component {...props} />
         ) : (
           <Redirect to={redirect} />
