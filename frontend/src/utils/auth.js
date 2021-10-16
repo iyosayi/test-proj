@@ -1,16 +1,15 @@
 import ls from "localstorage-slim";
 
-export const setAuth = (username, token) => {
-  const data = {
-    user: {
-      username,
-      token,
-    },
+export const setAuth = (username, token, type) => {
+  const user = {
+    username,
+    token,
+    type,
   };
 
-  ls.set("tp-data", data, { encrypt: true });
+  ls.set("tp-user", user, { encrypt: true });
 };
 
 export const getAuth = () => {
-  return ls.get("tp-data", { decrypt: true });
+  return ls.get("tp-user", { decrypt: true });
 };
