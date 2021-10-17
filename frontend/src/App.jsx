@@ -5,8 +5,6 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import PrivateRoute from "./utils/privateRoute";
 
-import "./App.css";
-
 const App = () => {
   return (
     <BrowserRouter>
