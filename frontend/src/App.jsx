@@ -1,11 +1,9 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Dashboard from "./components/Dashboard";
-import Login from "./components/Login";
-import SignUp from "./components/Signup";
-import PrivateRoute from "./utils/privateRoute";
-
-import "./App.css";
+import Dashboard from "@pages/Dashboard";
+import Login from "@pages/Login";
+import SignUp from "@pages/Signup";
+import PrivateRoute from "@utils/privateRoute";
 
 const App = () => {
   return (
