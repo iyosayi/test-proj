@@ -11,6 +11,7 @@ import { container } from 'tsyringe'
 import {StatusCodes} from 'http-status-codes'
 import User from '@modules/users/infra/typeorm/entities/User'
 import GetApplicationListService from '@modules/scholarships/services/GetApplicationListService'
+import GetDonorSchApplicationService from '@modules/scholarships/services/GetDonorSchApplications'
 
 
 export default class ScholarshipController {
@@ -89,8 +90,20 @@ export default class ScholarshipController {
 
     public async applications(request: Request, response: Response, next: NextFunction) {
         try {
-            const { id } = request.params
+            const { id } = request.user
             const scholarshipList = container.resolve(GetApplicationListService)
+            // @ts-ignore
+            const scholarship = await scholarshipList.execute(id)
+            return handleSuccess(response, StatusCodes.OK, scholarship,'Scholarship list retrieved successfully')
+        } catch (error: any) {
+            return handleError(response, error.statusCode, error.message)
+        }
+    }
+
+    public async donnorApplications(request: Request, response: Response, next: NextFunction) {
+        try {
+            const { id } = request.params
+            const scholarshipList = container.resolve(GetDonorSchApplicationService)
             // @ts-ignore
             const scholarship = await scholarshipList.execute(id)
             return handleSuccess(response, StatusCodes.OK, scholarship,'Scholarship list retrieved successfully')
