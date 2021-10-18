@@ -72,4 +72,9 @@ export default class ScholarshipRepository implements IScholarShipRepository {
         })
         return applications
     }
+
+    public async getDonorApplications(id: Scholarship): Promise<ScholarshipApplications[]> {
+        const users = await this.scholarshipApplications.find({where: {scholarship: id}, relations: ['student']})
+        return users
+    }
 }

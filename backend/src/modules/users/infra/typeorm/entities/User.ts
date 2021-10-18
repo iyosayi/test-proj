@@ -7,7 +7,6 @@ import {Entity,
     UpdateDateColumn,
     OneToMany,
     OneToOne,
-    ManyToOne
 } from 'typeorm'
 import ScholarshipApplications from '@modules/scholarships/infra/typeorm/entities/Applications'
 

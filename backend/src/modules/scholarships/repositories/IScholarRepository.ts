@@ -13,4 +13,5 @@ export default interface IScholarShipRepository {
     save(data: Scholarship): Promise<Scholarship>
     apply(data: IApplyScholarshipDTO): Promise<ScholarshipApplications>
     getApplications(id: User): Promise<ScholarshipApplications[]>
+    getDonorApplications(id: Scholarship): Promise<ScholarshipApplications[]>
 }
