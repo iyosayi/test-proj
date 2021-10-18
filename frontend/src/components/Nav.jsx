@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { ImBooks } from "react-icons/im";
 import { FaInbox } from "react-icons/fa";
+import { SiGooglescholar } from "react-icons/si";
 
-const Nav = () => {
+const Nav = ({ admin }) => {
   const path = useLocation().pathname;
 
   return (
@@ -14,19 +15,44 @@ const Nav = () => {
           path === "/" && "bg-overlay text-white"
         } p-4 rounded-lg text-center text-sm lg:text-base`}
       >
-        <ImBooks className="lg:text-4xl m-auto" />
+        <SiGooglescholar className="lg:text-4xl m-auto" />
         Scholarships
       </Link>
-      <Link
-        to="/applied"
-        role="button"
-        className={`${
-          path === "/applied" && "bg-overlay text-white"
-        } p-4 rounded-lg text-center text-sm lg:text-base`}
-      >
-        <FaInbox className="lg:text-4xl m-auto" />
-        Applied
-      </Link>
+      {admin ? (
+        <Link
+          to="/applied"
+          role="button"
+          className={`${
+            path === "/applied" && "bg-overlay text-white"
+          } p-4 rounded-lg text-center text-sm lg:text-base`}
+        >
+          <FaInbox className="lg:text-4xl m-auto" />
+          Applications
+        </Link>
+      ) : (
+        <Link
+          to="/applied"
+          role="button"
+          className={`${
+            path === "/applied" && "bg-overlay text-white"
+          } p-4 rounded-lg text-center text-sm lg:text-base`}
+        >
+          <FaInbox className="lg:text-4xl m-auto" />
+          Applied
+        </Link>
+      )}
+      {admin && (
+        <Link
+          to="/my-scholarships"
+          role="button"
+          className={`${
+            path === "/my-scholarships" && "bg-overlay text-white"
+          } p-4 rounded-lg text-center text-sm lg:text-base`}
+        >
+          <ImBooks className="lg:text-4xl m-auto" />
+          My Scholarships
+        </Link>
+      )}
     </nav>
   );
 };
