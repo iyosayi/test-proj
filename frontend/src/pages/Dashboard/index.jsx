@@ -3,9 +3,10 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Nav from "../../components/Nav";
-import DonorDashboard from "./components/DonorDashboard";
-import StudentDashboard from "./components/StudentDashboard";
-import Applied from "./components/Applied";
+import DonorDashboard from "./Donor";
+import StudentDashboard from "./Student";
+import Applied from "./Applied";
+import MyScholarships from "./MyScholarships";
 
 const Dashboard = () => {
   const user = getAuth();
@@ -13,7 +14,7 @@ const Dashboard = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Nav />
+      <Nav admin />
       <div className="max-w-[1800px] m-auto p-4">
         <Route path="/" exact>
           {!(user?.type === "student") ? (
@@ -24,6 +25,9 @@ const Dashboard = () => {
         </Route>
         <Route path="/applied">
           <Applied />
+        </Route>
+        <Route path="/my-scholarships">
+          <MyScholarships />
         </Route>
       </div>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import ScholarshipCard from "../ScholarshipCard";
+import ScholarshipCard from "../components/ScholarshipCard";
 
 const Applied = () => {
   return (
