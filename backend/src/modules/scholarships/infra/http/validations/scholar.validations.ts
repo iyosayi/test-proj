@@ -14,7 +14,7 @@ export const createScholarshipSchema = async (req: Request, res: Response, next:
 
 export const createAwardSchema = async (req: Request, res: Response, next: NextFunction) => {
   const schema = Joi.object({
-    winnerId: Joi.string().trim().required().label("Student Id"),
+    studentId: Joi.string().trim().required().label("Student Id"),
     scholarshipId: Joi.string().trim().required().label("Scholarship Id"),
   });
   await handleValidationError(res, next, schema.validate(req.body));

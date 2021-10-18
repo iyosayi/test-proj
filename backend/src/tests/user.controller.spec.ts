@@ -13,7 +13,7 @@ const testAuth = {
     token: '',
     email: '',
 }
-describe.skip('User controller', () => {
+describe('User controller', () => {
     it('creates a new user', async () => {
         const response = await api.post('/users').set('Content-Type', 'application/json').send(makeFakeUser({password: 'somePassword'}))
         expect(response.statusCode).to.be.equal(201)

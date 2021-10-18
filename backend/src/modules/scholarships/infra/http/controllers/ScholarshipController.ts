@@ -1,13 +1,16 @@
 import {Request, Response, NextFunction} from 'express'
-import AwardScholarShipService from '@modules/donors/services/AwardScholarshipService'
-import ContributeToScholarShipService from '@modules/donors/services/ContributeToScholarshipService'
-import CreateScholarShipService from '@modules/donors/services/CreateScholarShipService'
-import GetScholoarshipListService from '@modules/donors/services/GetScholarshipList'
-import GetScholoarshipByIdService from '@modules/donors/services/GetScholarshipByIdService'
-import SetScholarShipActiveService from '@modules/donors/services/SetActiveScholarshipService'
+import AwardScholarShipService from '@modules/scholarships/services/AwardScholarshipService'
+import ContributeToScholarShipService from '@modules/scholarships/services/ContributeToScholarshipService'
+import CreateScholarShipService from '@modules/scholarships/services/CreateScholarShipService'
+import GetScholoarshipListService from '@modules/scholarships/services/GetScholarshipList'
+import GetScholoarshipByIdService from '@modules/scholarships/services/GetScholarshipByIdService'
+import SetScholarShipActiveService from '@modules/scholarships/services/SetActiveScholarshipService'
+import ApplyToScholarshipService from '@modules/scholarships/services/ApplyToScholarshipService'
 import { handleError, handleSuccess, } from '@utils/utils'
 import { container } from 'tsyringe'
 import {StatusCodes} from 'http-status-codes'
+import User from '@modules/users/infra/typeorm/entities/User'
+import GetApplicationListService from '@modules/scholarships/services/GetApplicationListService'
 
 
 export default class ScholarshipController {
@@ -29,7 +32,7 @@ export default class ScholarshipController {
             const award = await awardService.execute({studentId, scholarshipId})
             return handleSuccess(response, StatusCodes.OK, award, 'Scholarship awarded successfully')
         } catch (error: any) {
-            return handleError(response, error.statusCode, error.message)
+            return handleError(response, StatusCodes.INTERNAL_SERVER_ERROR, error.message)
         }
     }
 
@@ -69,7 +72,29 @@ export default class ScholarshipController {
             const scholarship = await allService.execute({isActive, scholarshipId})
             return handleSuccess(response, StatusCodes.OK, scholarship,'Scholarship updated successfully')
         } catch (error: any) {
-            console.log("🚀 ~ file: ScholarshipController.ts ~ line 72 ~ ScholarshipController ~ setActive ~ error", error)
+            return handleError(response, error.statusCode, error.message)
+        }
+    }
+
+    public async apply(request: Request, response: Response, next: NextFunction) {
+        try {
+            const {studentId, scholarshipId} = request.body
+            const appliedScholarship = container.resolve(ApplyToScholarshipService)
+            const scholarship = await appliedScholarship.execute({studentId, scholarshipId})
+            return handleSuccess(response, StatusCodes.CREATED, scholarship,'Successfully applied to scholarship')
+        } catch (error: any) {
+            return handleError(response, error.statusCode, error.message)
+        }
+    }
+
+    public async applications(request: Request, response: Response, next: NextFunction) {
+        try {
+            const { id } = request.params
+            const scholarshipList = container.resolve(GetApplicationListService)
+            // @ts-ignore
+            const scholarship = await scholarshipList.execute(id)
+            return handleSuccess(response, StatusCodes.OK, scholarship,'Scholarship list retrieved successfully')
+        } catch (error: any) {
             return handleError(response, error.statusCode, error.message)
         }
     }

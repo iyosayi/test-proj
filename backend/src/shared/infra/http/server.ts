@@ -15,8 +15,6 @@ app.use(express.json());
 app.use('/api', routes);
 
 
-global.someVariable = 'king'
-
 const PORT = process.env.PORT || 3005
 app.listen(PORT, () => {
   console.log('Server listening');

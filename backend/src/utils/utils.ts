@@ -32,7 +32,6 @@ export const handleValidationError = async (res: Response, next: NextFunction, v
       if (validate.error) throw validate.error;
       next();
     } catch (error: any) {
-    console.log("🚀 ~ file: utils.ts ~ line 34 ~ handleValidationError ~ error", error.details[0].message);
       
       return handleError(
         res,

@@ -3,29 +3,24 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    OneToMany,
-    OneToOne,
     JoinColumn,
-    ManyToMany
+    ManyToOne,
 } from 'typeorm'
 import User from '@modules/users/infra/typeorm/entities/User'
 import Scholarship from './Scholarship'
 
-
-@Entity('donors')
-export default class Donor {
+@Entity('scholarship_applications')
+export default class ScholarshipApplications {
     @PrimaryGeneratedColumn('increment')
     id: string
 
-    @OneToOne(() => User, user => user.id, {cascade: true, onDelete: 'CASCADE'})
+    @ManyToOne(() => User, user => user.id)
     @JoinColumn()
-    user: User
+    student: User
 
-    @OneToMany(() => Scholarship, scholarship => scholarship.donor)
-    scholarships: Scholarship[]
-    
-    @ManyToMany(() => Scholarship, sch => sch.donors)
-    scholarship: Scholarship[]
+    @ManyToOne(() => Scholarship, scholarship => scholarship.id)
+    @JoinColumn()
+    scholarship: Scholarship
 
     @CreateDateColumn()
     created_at: Date

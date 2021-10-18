@@ -10,8 +10,9 @@ import {
     ManyToOne,
     ManyToMany
 } from 'typeorm'
-import Donor from './Donor'
-import Student from './Student'
+// import Donor from './Donor'
+import Student from './AwardedScholarships'
+import ScholarshipApplications from './Applications'
 
 
 export enum ScholarshipStatus {
@@ -33,6 +34,9 @@ export default class Scholarship {
     @Column()
     amount: number
 
+    @Column({ nullable: true })
+    isApplied: true
+
     @Column({
         type: 'boolean',
         default: true
@@ -49,12 +53,15 @@ export default class Scholarship {
     @ManyToOne(() => User, user => user.scholarships, {onDelete: 'SET NULL'})
     donor: User
 
-    @OneToMany(() => Student, student => student.scholarships, { onDelete: 'SET NULL'})
+    @OneToMany(() => Student, student => student.scholarships, { onDelete: 'SET NULL' })
     student: Student
 
-    @ManyToMany(() => Donor, con => con.scholarship)
-    @JoinColumn({name: 'contribution_table'})
-    donors: Donor[]
+    @OneToMany(() => ScholarshipApplications, sch => sch.scholarship)
+    application: ScholarshipApplications
+
+    // @ManyToMany(() => Donor, con => con.scholarship)
+    // @JoinColumn({name: 'contribution_table'})
+    // donors: Donor[]
 
     @CreateDateColumn()
     created_at: Date

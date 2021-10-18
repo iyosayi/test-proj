@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { makeFakeUser, signup } from './fixtures/index'
+import { signup } from './fixtures/index'
 import request from 'supertest'
 import { env } from '../config/environment'
 
@@ -11,6 +11,8 @@ const testObj = {
     scholarshipId: '',
     donorId: '',
     token: '',
+    studentId: '',
+    studentToken: '',
 }
 
 describe('Scholarship controller', () => {
@@ -24,7 +26,6 @@ describe('Scholarship controller', () => {
         })
         expect(response.statusCode).to.be.equal(201)
         expect(response.body.data.amount).to.be.equal("100")
-        // expect(response.body.data.donors[0]).to.be.equal(String(user.id))
         testObj.scholarshipId = response.body.data.id
         testObj.donorId = user.id
         testObj.token = token
@@ -33,11 +34,12 @@ describe('Scholarship controller', () => {
     it('donor can award scholarship to student', async () => {
         const {user, token} = await signup({type: 'student',})
         const response = await api.patch('/scholarships/award').set('Authorization', `Bearer ${testObj.token}`).send({
-            winnerId: String(user.id),
+            studentId: String(user.id),
             scholarshipId: testObj.scholarshipId.toString(),
         })
         expect(response.statusCode).to.be.equal(200)
-        expect(response.body.data.status).to.be.equal('awarded')
+        testObj.studentId = user.id
+        testObj.studentToken = token
     })
 
     it('gets all scholarships', async () => {
@@ -61,5 +63,19 @@ describe('Scholarship controller', () => {
         expect(response.body.data.isActive).to.be.false
     })
 
-   
+    it('students apply to scholarships', async () => {
+        const response = await api.post(`/scholarships/apply`).set('Authorization', `Bearer ${testObj.studentToken}`).send({
+            studentId: testObj.studentId.toString() ,
+            scholarshipId: testObj.scholarshipId.toString(),
+        })
+        expect(response.statusCode).to.be.equal(201)
+        expect(response.body.data.student.id).to.be.equal(testObj.studentId)
+    })
+
+    it('gets a students applied scholarship', async () => {
+        const response = await api.get(`/scholarships/applications/${testObj.studentId}`).set('Authorization', `Bearer ${testObj.studentToken}`)
+        expect(response.statusCode).to.be.equal(200)
+        expect(response.body.data.length).to.be.equal(1)
+        expect(response.body.data[0].scholarship.id).to.be.a('number')
+    })
 })
