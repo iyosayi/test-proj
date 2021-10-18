@@ -2,8 +2,8 @@ import ScholarshipList from "./ScholarshipList";
 
 const StudentDashboard = () => {
   return (
-    <div>
-      <h1 className="text-2xl">Search for scholarships</h1>
+    <div className="max-w-4xl m-auto">
+      <h1 className="text-2xl mb-8">Search for scholarships</h1>
       <ScholarshipList />
     </div>
   );
