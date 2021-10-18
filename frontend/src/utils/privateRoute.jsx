@@ -6,7 +6,7 @@ const PrivateRoute = ({ comp: Component, redirect, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        getAuth()?.user?.token ? (
+        !getAuth()?.user?.token ? (
           <Component {...props} />
         ) : (
           <Redirect to={redirect} />
