@@ -1,0 +1,38 @@
+{
+    "name": "chat-group",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/iyosayi/chat-group.git",
+    "author": "King <iyosa14@gmail.com>",
+    "license": "MIT",
+    "engines": {
+      "node": "16.x",
+      "yarn": "1.x"
+    },
+    "scripts": {
+      "clean": "rimraf dist",
+      "backend:install": "cd backend && yarn install",
+      "frontend:install": "cd frontend && yarn install",
+      "backend:build": "cd backend && yarn clean && yarn build",
+      "frontend:build": "cd frontend && yarn run build",
+      "build": "yarn backend:build && yarn frontend:build",
+      "start": "cd backend && node ./dist/index.js",
+      "heroku-prebuild": "yarn backend:install && yarn frontend:install"
+    },
+    "dependencies": {
+      "cross-env": "^7.0.3",
+      "rimraf": "^3.0.2"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.15.7",
+        "@babel/core": "^7.15.8",
+        "@babel/node": "^7.15.8",
+        "@babel/plugin-proposal-class-properties": "^7.14.5",
+        "@babel/preset-env": "^7.15.8",
+        "@types/node": "^16.11.0",
+        "babel-plugin-module-resolver": "^4.1.0",
+        "babel-plugin-transform-typescript-metadata": "^0.3.2",
+        "ts-node-dev": "^1.1.8"
+      }
+  }
+  

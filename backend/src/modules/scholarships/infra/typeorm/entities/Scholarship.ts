@@ -6,11 +6,9 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany,
-    JoinColumn,
     ManyToOne,
-    ManyToMany
 } from 'typeorm'
-// import Donor from './Donor'
+
 import Student from './AwardedScholarships'
 import ScholarshipApplications from './Applications'
 

@@ -26,7 +26,7 @@ export default class CreateUserService {
             throw new UniqueConstraintError('Email address already exists.')
         }
         const hashedpassword = await this.hashProvider.generateHash(password)
-        const user = await this.usersRepository.create({name, email, type, password: hashedpassword})
+        const user = await this.usersRepository.create({name, email:email.toLowerCase(), type, password: hashedpassword})
         const token = sign({ id: user.id, email: user.email }, authConfig.JWT.secret, {
             expiresIn: authConfig.JWT.expires
         })

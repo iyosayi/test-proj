@@ -15,7 +15,7 @@ class UsersController {
     try {
       const showUsers = container.resolve(GetUsersService);
       const users = await showUsers.execute();
-      return handleSuccess(response, StatusCodes.OK, users, 'User retrieved successfully')
+      return handleSuccess(response, StatusCodes.OK, users, 'Users retrieved successfully')
     } catch (error: any) {
       return handleError(response, error.statusCode, error.message);
     }
@@ -35,14 +35,14 @@ class UsersController {
 
   public async me(request: Request, response: Response): Promise<Response> {
     try {
-      const { id } = request.params;
+      const { id } = request.user;
       const showUser = container.resolve(GetUserById);
       const user = await showUser.execute(id);
       return handleSuccess(response, StatusCodes.OK, user, 'User retrieved successfully');
     } catch (error: any) {
       return handleError(response, error.statusCode, error.message)
     }
-  }
+  } 
 
   public async create(request: Request, response: Response): Promise<Response> {
     try {

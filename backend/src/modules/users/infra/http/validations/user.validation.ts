@@ -14,8 +14,8 @@ export const createUserSchema = async (req: Request, res: Response, next: NextFu
 
 export const loginSchema = async (req: Request, res: Response, next: NextFunction) => {
   const schema = Joi.object({
-    email: Joi.string().email().trim().required().label("email"),
-    password: Joi.string().trim().required().label("First name"),
+    email: Joi.string().email().trim().required().label("Email"),
+    password: Joi.string().trim().required().label("Password"),
   });
   await handleValidationError(res, next, schema.validate(req.body));
 };

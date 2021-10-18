@@ -8,7 +8,7 @@ const userController = new UsersController();
 
 router.route('/').get(isAnyone, userController.all).post(createUserSchema, userController.create)
 
-router.route('/:id').get(isAnyone, userController.me).patch(isAnyone, userController.updateProfile)
+router.route('/me').get(isAnyone, userController.me).patch(isAnyone, userController.updateProfile)
 
 router.post('/auth', loginSchema, userController.login)
 
