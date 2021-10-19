@@ -50,14 +50,77 @@ export const myApplications = () => {
   return { data, error, isLoading };
 };
 
+export const myAwarded = () => {
+  const { userData } = useContext(UserContext);
+
+  const { data, error, isLoading } = useQuery("myScholarships", async () => {
+    try {
+      const res = await scAxios({
+        url: `/award`,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      });
+
+      return res.data.data;
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  return { data, error, isLoading };
+};
+
+export const myScholarships = () => {
+  const { userData } = useContext(UserContext);
+
+  const { data, error, isLoading } = useQuery("myScholarships", async () => {
+    try {
+      const res = await scAxios({
+        url: `/donors/applications`,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      });
+
+      return res.data.data;
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  return { data, error, isLoading };
+};
+
+export const scholarshipApplicants = (scID) => {
+  const { userData } = useContext(UserContext);
+
+  const { data, error, isLoading } = useQuery("scApplicants", async () => {
+    try {
+      const res = await scAxios({
+        url: `/applicants/${scID}`,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      });
+
+      return res.data.data;
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  return { data, error, isLoading };
+};
+
 export const scholarshipApply = () => {
   const { userData } = useContext(UserContext);
   const queryClient = useQueryClient();
 
   const { mutateAsync, isLoading, error, isError, isSuccess } = useMutation(
-    ({ note, scID }) => {
+    async ({ note, scID, donorId }) => {
       try {
-        const res = scAxios({
+        const res = await scAxios({
           method: "POST",
           url: "/apply",
           headers: {
@@ -66,15 +129,16 @@ export const scholarshipApply = () => {
           data: {
             scholarshipId: String(scID),
             note,
+            donorId: String(donorId),
           },
         });
+        return res;
       } catch (error) {
-        console.log("message", error);
-        throw error;
+        throw Error(error.response.data.message);
       }
     },
     {
-      onSuccess: () => queryClient.invalidateQueries("allScholarships"),
+      onSuccess: () => queryClient.invalidateQueries("myApplications"),
     }
   );
   return { apply: mutateAsync, isLoading, error, isError, isSuccess };
@@ -82,24 +146,30 @@ export const scholarshipApply = () => {
 
 export const scholarshipAward = () => {
   const { userData } = useContext(UserContext);
-  const { invalidateQueries } = useQueryClient();
+  const queryClient = useQueryClient();
 
   const { mutateAsync, isLoading, error, isError, isSuccess } = useMutation(
-    ({ scID }) => {
-      return scAxios({
-        method: "PATCH",
-        url: "/award",
-        headers: {
-          Authorization: `Bearer ${userData.token}`,
-        },
-        data: {
-          studentId: userData.id,
-          scholarshipId: scID,
-        },
-      });
+    async ({ scId, studentId }) => {
+      try {
+        const res = scAxios({
+          method: "PATCH",
+          url: "/award",
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+          },
+          data: {
+            studentId: String(studentId),
+            scholarshipId: String(studentId),
+          },
+        });
+
+        return res;
+      } catch (error) {
+        throw Error(error.response.data.message);
+      }
     },
     {
-      onSuccess: () => invalidateQueries("allScholarships"),
+      onSuccess: () => queryClient.invalidateQueries("allScholarships"),
     }
   );
   return { award: mutateAsync, isLoading, error, isError, isSuccess };
@@ -126,7 +196,8 @@ export const scholarshipCreate = () => {
       });
     },
     {
-      onSuccess: () => queryClient.invalidateQueries("allScholarships"),
+      onSuccess: () =>
+        queryClient.invalidateQueries("allScholarships", "myScholarships"),
     }
   );
   return { create: mutateAsync, isLoading, error, isError, isSuccess };
