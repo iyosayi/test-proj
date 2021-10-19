@@ -23,7 +23,7 @@ const Nav = ({ donor }) => {
           to="/applications"
           role="button"
           className={`${
-            path === "/applied" && "bg-overlay text-white"
+            path === "/applications" && "bg-overlay text-white"
           } p-4 rounded-lg text-center text-sm lg:text-base`}
         >
           <FaInbox className="lg:text-4xl m-auto" />

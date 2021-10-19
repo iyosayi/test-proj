@@ -131,3 +131,28 @@ export const scholarshipCreate = () => {
   );
   return { create: mutateAsync, isLoading, error, isError, isSuccess };
 };
+
+export const scholarshipContribute = () => {
+  const { userData } = useContext(UserContext);
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, isLoading, error, isError, isSuccess } = useMutation(
+    ({ scID, amount }) => {
+      return scAxios({
+        method: "PATCH",
+        url: "/contribute",
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+        data: {
+          scholarshipId: String(scID),
+          amount: String(amount),
+        },
+      });
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries("allScholarships"),
+    }
+  );
+  return { contribute: mutateAsync, isLoading, error, isError, isSuccess };
+};

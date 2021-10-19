@@ -15,9 +15,9 @@ export const authLogin = () => {
   const history = useHistory();
 
   const { mutateAsync, isLoading, error } = useMutation(
-    ({ email, password }) => {
+    async ({ email, password }) => {
       try {
-        const res = baseAxios({
+        const res = await baseAxios({
           method: "POST",
           url: "/users/auth",
           data: {
@@ -26,15 +26,15 @@ export const authLogin = () => {
           },
         });
 
-        return res;
+        return res.data.data;
       } catch (error) {
-        throw error;
+        throw Error(error.response.data.message);
       }
     },
     {
       onSuccess: (data) => {
-        setUserData(data.data.data);
-        setAuth(data.data.data);
+        setUserData(data);
+        setAuth(data);
         history.push("/");
       },
     }
@@ -47,22 +47,27 @@ export const authSignup = () => {
   const history = useHistory();
 
   const { mutateAsync, isLoading, error } = useMutation(
-    ({ firstName, lastName, email, password, donor }) => {
-      return baseAxios({
-        method: "POST",
-        url: "/users",
-        data: {
-          name: `${firstName} ${lastName}`,
-          email: email,
-          password: password,
-          type: donor ? "donor" : "student",
-        },
-      });
+    async ({ firstName, lastName, email, password, donor }) => {
+      try {
+        const res = await baseAxios({
+          method: "POST",
+          url: "/users",
+          data: {
+            name: `${firstName} ${lastName}`,
+            email: email,
+            password: password,
+            type: donor ? "donor" : "student",
+          },
+        });
+        return res.data.data;
+      } catch (error) {
+        throw Error(error.response.data.message);
+      }
     },
     {
       onSuccess: (data) => {
-        setAuth(data.data.data);
-        setUserData(data.data.data);
+        setAuth(data);
+        setUserData(data);
         history.push("/");
       },
     }

@@ -1,12 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MdPeopleAlt } from "react-icons/md";
+import Loader from "react-loader-spinner";
 
 import ModalBase from "./ModalBase";
 import { ModalContext } from "./ModalContext";
 import SaveButton from "../SaveButton";
+import { scholarshipContribute } from "../../api/scholarships";
 
-const ContributeModal = ({ applied }) => {
+const ContributeModal = ({ scData, applied }) => {
+  const [contribution, setContribution] = useState(0);
+  const [grantWorth, setGrantWorth] = useState(scData.amount);
   const { modalData, setModalData } = useContext(ModalContext);
+  const { contribute, isLoading, error, isError, isSuccess } =
+    scholarshipContribute();
+
+  const handleContribute = async () => {
+    await contribute({ scID: scData.id, amount: contribution });
+    setGrantWorth(Number(grantWorth) + Number(contribution));
+  };
 
   return (
     <ModalBase>
@@ -17,11 +28,14 @@ const ContributeModal = ({ applied }) => {
               <img src="https://photos.angel.co/startups/i/5001845-166baf15b842a06817010b6dc196fda3-medium_jpg.jpg?buster=1582753841" />
             </div>
             <div>
-              <h1 className="font-bold">CareerMove</h1>
-              <p>Obtain an ACCA certification for free!</p>
+              <h1 className="font-bold uppercase">{scData.name}</h1>
+              <p>{scData.description}</p>
               <p className="flex items-center text-sm gap-1">
                 <MdPeopleAlt />
-                11-50 Beneficiaries
+                {scData.donor.name}
+              </p>
+              <p>
+                Help increase the impact of this scholarship by contributing.
               </p>
             </div>
           </div>
@@ -33,30 +47,46 @@ const ContributeModal = ({ applied }) => {
           <section className="p-6 w-1/3">
             <div className="border rounded px-4 py-2 space-y-4">
               <div>
-                <b>Sponsor</b>
-                <p>CareerMove</p>
+                <b>Grant Worth</b>
+                <p>{grantWorth}</p>
               </div>
-              <div>
-                <b>Beneficiaries</b>
-                <p>11-50 people</p>
-              </div>
-              <div>
-                <b>Contribute</b>
+              <div className="flex flex-col gap-4">
+                <b>How much would you like to contribute?</b>
+
+                <input
+                  type="number"
+                  value={contribution}
+                  onChange={(e) => setContribution(e.target.value)}
+                  className="h-10 border"
+                />
+
+                <button
+                  className="py-1 px-3 border rounded border-blue-500  hover:bg-blue-500 hover:text-white flex justify-center"
+                  onClick={handleContribute}
+                >
+                  {isLoading ? (
+                    <Loader
+                      type="TailSpin"
+                      color="#3b82f6"
+                      width={25}
+                      height={25}
+                    />
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
+
+                {isError ? (
+                  <p className="text-red-400">{error.toString()}</p>
+                ) : isSuccess ? (
+                  <p className="text-green-400">Contributed successfully</p>
+                ) : null}
               </div>
             </div>
           </section>
         </div>
         <div className="flex justify-between p-6">
           <SaveButton />
-          <div
-            className={`border rounded-[4px] border-blue-500  hover:bg-blue-500 hover:text-white ${
-              applied && "bg-blue-500 text-white"
-            }`}
-          >
-            <button className={`py-1 px-3 cursor-default`} onClick={() => {}}>
-              Close
-            </button>
-          </div>
         </div>
       </div>
     </ModalBase>
