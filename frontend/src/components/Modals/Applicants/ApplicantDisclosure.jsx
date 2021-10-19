@@ -10,7 +10,6 @@ const ApplicantDisclosure = ({ applicant }) => {
       await award({ scId: applicant.id, studentId: applicant.student.id });
     }
   };
-  console.log(applicant);
 
   return (
     <div className="w-full">

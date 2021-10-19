@@ -5,35 +5,47 @@ import { IoMdPerson } from "react-icons/io";
 import ModalBase from "./ModalBase";
 import { UserContext } from "../../context/user";
 import { scholarshipApply } from "@api/scholarships";
-import { updateProfile } from "../../api/auth";
+import { refreshUser, updateProfile } from "../../api/auth";
+import { setAuth } from "../../utils/auth";
 
 const ProfileModal = ({ scData }) => {
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const [bio, setBio] = useState("");
   const { update, error, isError, isSuccess, isLoading } = updateProfile();
 
   const handleUpdate = async () => {
-    await update({ bio });
+    const res = await update({ bio });
+    setUserData({ ...userData, user: res });
+    setAuth(userData);
   };
-
-  console.log(userData);
 
   return (
     <ModalBase>
       <div className="flex">
-        <div className="bg-modal-infoBackground w-1/3 p-6">
+        <div className="hidden md:flex flex-col gap-2 bg-modal-infoBackground w-1/3 p-6">
           <h4 className="text-gray-500 mb-2">{userData?.user.name}</h4>
           <div className="flex gap-2 items-center">
             <div className="bg-gray-400 p-1 rounded-full">
               <IoMdPerson className="text-3xl" />
             </div>
-            <p className="uppercase">{scData?.name}</p>
           </div>
+          {userData?.user?.profile && (
+            <>
+              <p className="mt-2">Bio:</p>
+              <p>{userData.user.profile}</p>
+            </>
+          )}
         </div>
         <div className="w-full p-6 space-y-3">
           <h4 className="text-sm">YOUR PROFILE</h4>
           <hr />
           <p>{userData?.user.name}</p>
+          {userData?.user?.profile && (
+            <div className="md:hidden">
+              <p className="mt-4 font-bold">Bio:</p>
+              <p className="mb-5">{userData.user.profile}</p>
+            </div>
+          )}
           <p className="text-sm">
             Set a bio to let donors know why you're a good fit for scholarships.{" "}
           </p>
