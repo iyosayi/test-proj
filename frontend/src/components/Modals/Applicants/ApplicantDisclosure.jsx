@@ -10,6 +10,7 @@ const ApplicantDisclosure = ({ applicant }) => {
       await award({ scId: applicant.id, studentId: applicant.student.id });
     }
   };
+  console.log(applicant);
 
   return (
     <div className="w-full">
@@ -52,6 +53,12 @@ const ApplicantDisclosure = ({ applicant }) => {
               </Disclosure.Button>
               <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
                 {applicant.note}
+                {applicant?.student?.profile && (
+                  <div className="mt-4">
+                    <b className="text-black">Applicant Bio</b>
+                    <p>{String(applicant.student.profile)}</p>
+                  </div>
+                )}
               </Disclosure.Panel>
             </>
           )}

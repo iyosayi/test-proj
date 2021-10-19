@@ -12,6 +12,7 @@ import DetailView from "./components/Modals/DetailView";
 import ContributeModal from "./components/Modals/ContributeModal";
 import AddScholarship from "./components/Modals/AddModal";
 import ApplicantsView from "./components/Modals/Applicants";
+import ProfileModal from "./components/Modals/ProfileModal";
 
 const App = () => {
   const { modalData } = useContext(ModalContext);
@@ -32,6 +33,9 @@ const App = () => {
       )}
       {modalData.modalShow && modalData.modalType === "applicants" && (
         <ApplicantsView scData={modalData.scData} />
+      )}
+      {modalData.modalShow && modalData.modalType === "profile" && (
+        <ProfileModal />
       )}
 
       <Switch>

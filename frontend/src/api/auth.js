@@ -75,3 +75,29 @@ export const authSignup = () => {
 
   return { signup: mutateAsync, isLoading, error };
 };
+
+export const updateProfile = () => {
+  const { userData } = useContext(UserContext);
+
+  const { mutateAsync, error, isError, isSuccess, isLoading } = useMutation(
+    async ({ bio }) => {
+      try {
+        const res = await baseAxios({
+          method: "PATCH",
+          url: "/users/me",
+          data: {
+            bio,
+          },
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+          },
+        });
+        return res;
+      } catch (error) {
+        throw Error(error.response.data.message);
+      }
+    }
+  );
+
+  return { update: mutateAsync, error, isError, isSuccess, isLoading };
+};

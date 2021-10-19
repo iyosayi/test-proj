@@ -5,7 +5,6 @@ import ModalBase from "./ModalBase";
 import SaveButton from "../SaveButton";
 
 const DetailView = ({ scData, applied }) => {
-  console.log(scData);
   return (
     <ModalBase>
       <div className="relative">
