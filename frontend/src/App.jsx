@@ -35,9 +35,9 @@ const App = () => {
       )}
 
       <Switch>
-        <PrivateRoute path="/" comp={Dashboard} redirect="/login" exact />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
+        <PrivateRoute path="/" comp={Dashboard} redirect="/login" />
       </Switch>
     </BrowserRouter>
   );

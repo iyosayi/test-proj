@@ -6,7 +6,9 @@ import { scholarshipAward } from "../../../api/scholarships";
 const ApplicantDisclosure = ({ applicant }) => {
   const { award, isLoading, isSuccess } = scholarshipAward();
   const handleAward = async () => {
-    await award({ scId: applicant.id, studentId: applicant.student.id });
+    if (!applicant.awarded) {
+      await award({ scId: applicant.id, studentId: applicant.student.id });
+    }
   };
 
   return (
@@ -28,7 +30,7 @@ const ApplicantDisclosure = ({ applicant }) => {
                   )}
                   <div
                     className={`border rounded ${
-                      isSuccess
+                      applicant.awarded || isSuccess
                         ? "border-green-500  hover:bg-green-500 text-green-500"
                         : "border-blue-500  hover:bg-blue-500"
                     }  hover:text-white`}
@@ -38,7 +40,7 @@ const ApplicantDisclosure = ({ applicant }) => {
                       className={`py-1 px-3`}
                       onClick={handleAward}
                     >
-                      {isSuccess ? "Awarded" : "Award"}
+                      {applicant.awarded || isSuccess ? "Awarded" : "Award"}
                     </div>
                   </div>
                   <ChevronUpIcon

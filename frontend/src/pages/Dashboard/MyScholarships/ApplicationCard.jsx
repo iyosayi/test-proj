@@ -6,7 +6,7 @@ import { BsExclamationTriangleFill } from "react-icons/bs";
 import SaveButton from "../../../components/SaveButton";
 
 const ApplicationCard = ({ applied, scData }) => {
-  const { modalData, setModalData } = useContext(ModalContext);
+  const { setModalData } = useContext(ModalContext);
 
   return (
     <div className="w-full border rounded-sm flex flex-col p-4 gap-4">
