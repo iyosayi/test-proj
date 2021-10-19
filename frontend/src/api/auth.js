@@ -16,14 +16,20 @@ export const authLogin = () => {
 
   const { mutateAsync, isLoading, error } = useMutation(
     ({ email, password }) => {
-      return baseAxios({
-        method: "POST",
-        url: "/users/auth",
-        data: {
-          email: email,
-          password: password,
-        },
-      });
+      try {
+        const res = baseAxios({
+          method: "POST",
+          url: "/users/auth",
+          data: {
+            email: email,
+            password: password,
+          },
+        });
+
+        return res;
+      } catch (error) {
+        throw error;
+      }
     },
     {
       onSuccess: (data) => {
