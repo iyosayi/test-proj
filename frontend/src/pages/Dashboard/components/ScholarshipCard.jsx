@@ -32,30 +32,29 @@ const ScholarshipCard = ({ applied, admin }) => {
           </p>
         </div>
       </div>
-      {!admin && (
-        <div className="w-full">
-          <div className="w-full border flex p-2 rounded-[4px] justify-between items-center">
-            <p>Software engineer, Server Side Engineering</p>
-            <div
-              className={`border rounded-[4px] border-blue-500  hover:bg-blue-500 hover:text-white ${
-                applied && "bg-blue-500 text-white"
-              }`}
+      <div className="w-full">
+        <div className="w-full border flex p-2 rounded-[4px] justify-between items-center">
+          <p>Software engineer, Server Side Engineering</p>
+          <div
+            className={`border rounded-[4px] border-blue-500  hover:bg-blue-500 hover:text-white ${
+              applied && "bg-blue-500 text-white"
+            }`}
+          >
+            <button
+              className={`py-1 px-3 ${applied && "cursor-default"}`}
+              onClick={() => {
+                setModalData({
+                  modalShow: true,
+                  modalType: "apply",
+                });
+              }}
             >
-              <button
-                className={`py-1 px-3 ${applied && "cursor-default"}`}
-                onClick={() => {
-                  setModalData({
-                    modalShow: true,
-                    modalType: "apply",
-                  });
-                }}
-              >
-                {applied ? "Applied" : "Apply"}
-              </button>
-            </div>
+              {admin ? "Contribute" : applied ? "Applied" : "Apply"}
+            </button>
           </div>
         </div>
-      )}
+      </div>
+
       <div className="flex justify-between">
         <SaveButton />
         <div className="flex gap-2">
