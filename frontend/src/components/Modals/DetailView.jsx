@@ -5,6 +5,7 @@ import ModalBase from "./ModalBase";
 import SaveButton from "../SaveButton";
 
 const DetailView = ({ scData, applied }) => {
+  console.log(scData);
   return (
     <ModalBase>
       <div className="relative">
@@ -14,8 +15,10 @@ const DetailView = ({ scData, applied }) => {
               <img src="https://photos.angel.co/startups/i/5001845-166baf15b842a06817010b6dc196fda3-medium_jpg.jpg?buster=1582753841" />
             </div>
             <div>
-              <h1 className="font-bold uppercase">{scData.name}</h1>
-              <p>{scData.description}</p>
+              <h1 className="font-bold uppercase">
+                {scData.name || scData?.scholarship.name}
+              </h1>
+              <p>{scData?.description || scData?.scholarship.description}</p>
             </div>
           </div>
         </header>
@@ -31,11 +34,11 @@ const DetailView = ({ scData, applied }) => {
               </div>
               <div>
                 <b>Grant Worth</b>
-                <p>{scData.amount}</p>
+                <p>{scData.amount || scData?.scholarship.amount}</p>
               </div>
               <div>
                 <b>Tags</b>
-                <p>{scData.tag}</p>
+                <p>{scData.tag || scData?.scholarship.tag}</p>
               </div>
             </div>
           </section>
