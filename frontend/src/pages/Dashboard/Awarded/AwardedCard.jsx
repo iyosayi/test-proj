@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import { ModalContext } from "../../../components/Modals/ModalContext";
 
-import { MdPeopleAlt, MdOutlineHideSource } from "react-icons/md";
+import { MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 import { BsExclamationTriangleFill } from "react-icons/bs";
 import SaveButton from "../../../components/SaveButton";
 
 const AwardedCard = ({ scData }) => {
   const { modalData, setModalData } = useContext(ModalContext);
 
-  console.log("Applied", scData);
-
+  console.log("scd", scData);
   return (
     <div className="w-full border rounded-sm flex flex-col p-4 gap-4">
       <div className="flex gap-2">
@@ -29,7 +28,11 @@ const AwardedCard = ({ scData }) => {
           <p>{scData.scholarship.description}</p>
           <p className="flex items-center text-sm gap-1">
             <MdPeopleAlt />
-            {/* {scData.donor.name} */}
+            {scData.donor.name}
+          </p>
+          <p className="flex items-center text-sm gap-1">
+            <MdAttachMoney />
+            {scData.scholarship.amount}
           </p>
         </div>
       </div>
@@ -45,10 +48,6 @@ const AwardedCard = ({ scData }) => {
           <button className="flex items-center gap-1">
             <BsExclamationTriangleFill />
             Report
-          </button>
-          <button className="flex items-center gap-1">
-            <MdOutlineHideSource />
-            Hide
           </button>
         </div>
       </div>

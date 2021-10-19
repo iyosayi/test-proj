@@ -37,25 +37,3 @@ const MyScholarships = () => {
 };
 
 export default MyScholarships;
-
-const scD = {
-  id: 3,
-  name: "New Scholarship",
-  description: "ALKNAFLKNKLAEN",
-  amount: 132024,
-  tag: "Test",
-  isActive: true,
-  status: "in-progress",
-  donor: {
-    id: 3,
-    name: "Donor Test",
-    password: "$2a$08$XLx.bDoTSwHWKqrtGbr/B.lsxzw39mR3Nv7kQHk7/tVliCRM6y/fm",
-    email: "donor@test.com",
-    profile: null,
-    created_at: "2021-10-19T13:58:18.143Z",
-    updated_at: "2021-10-19T13:58:18.143Z",
-    type: "donor",
-  },
-  created_at: "2021-10-19T15:28:10.574Z",
-  updated_at: "2021-10-19T15:28:10.574Z",
-};

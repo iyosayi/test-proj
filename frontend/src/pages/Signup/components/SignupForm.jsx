@@ -22,7 +22,6 @@ const SignupForm = () => {
     donor,
   }) => {
     const res = await signup({ firstName, lastName, email, password, donor });
-    console.log(res);
   };
 
   return (

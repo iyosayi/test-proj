@@ -9,9 +9,9 @@ import Applied from "./Applied";
 import MyScholarships from "./MyScholarships";
 import Awarded from "./Awarded";
 
-const Dashboard = () => {
+const Dashboard = ({ match }) => {
   const { userData } = useContext(UserContext);
-
+  console.log(match);
   return (
     <BrowserRouter>
       <Header />

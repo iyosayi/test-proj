@@ -159,7 +159,7 @@ export const scholarshipAward = () => {
           },
           data: {
             studentId: String(studentId),
-            scholarshipId: String(studentId),
+            scholarshipId: String(scId),
           },
         });
 
