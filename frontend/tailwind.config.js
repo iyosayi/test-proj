@@ -18,6 +18,9 @@ module.exports = {
           backdrop: "rgba(0,0,0,.57)",
         },
       },
+      boxShadow: {
+        error: "0 0 6px -1px #cc0000",
+      },
     },
   },
   variants: {

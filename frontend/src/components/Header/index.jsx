@@ -1,9 +1,15 @@
-import { FaBell } from "react-icons/fa";
-import logo from "@assets/logo.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import { FaBell } from "react-icons/fa";
+import { MdAddBox } from "react-icons/md";
+import logo from "@assets/logo.png";
 import ProfilePopover from "./ProfilePopover";
+import { UserContext } from "../../context/user";
 
 const Header = () => {
+  const { userData } = useContext(UserContext);
+
   return (
     <header className="sticky top-0 h-20 bg-header text-white px-4 py-4">
       <div className="max-w-[1800px] m-auto h-full flex justify-between">
@@ -12,6 +18,15 @@ const Header = () => {
           <p className="self-center font-medium text-xl">Scholars</p>
         </Link>
         <div className="flex items-center text-2xl gap-1">
+          {userData?.user.type === "donor" && (
+            <div
+              role="button"
+              className="flex items-center p-3 gap-2 rounded-full transition-all ease-in-out duration-300 hover:bg-overlay hover:text-blue-200"
+            >
+              <MdAddBox className="text-3xl" />
+            </div>
+          )}
+
           <div
             role="button"
             className="flex items-center p-3 gap-2 rounded-full transition-all ease-in-out duration-300 hover:bg-overlay hover:text-blue-200"

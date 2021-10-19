@@ -6,17 +6,28 @@ import Login from "@pages/Login";
 import SignUp from "@pages/Signup";
 import PrivateRoute from "@utils/privateRoute";
 
-import ApplyModal from "./components/Modals/ApplyModal";
 import { ModalContext } from "./components/Modals/ModalContext";
+import ApplyModal from "./components/Modals/ApplyModal";
+import DetailView from "./components/Modals/DetailView";
+import ContributeModal from "./components/Modals/ContributeModal";
 
 const App = () => {
   const { modalData } = useContext(ModalContext);
 
   return (
     <BrowserRouter>
-      {modalData.modalShow && modalData.modalType === "apply" && <ApplyModal />}
+      {modalData.modalShow && modalData.modalType === "apply" && (
+        <ApplyModal scData={modalData.scData} />
+      )}
+      {modalData.modalShow && modalData.modalType === "detailView" && (
+        <DetailView scData={modalData.scData} />
+      )}
+      {modalData.modalShow && modalData.modalType === "contribute" && (
+        <ContributeModal scData={modalData.scData} />
+      )}
+
       <Switch>
-        <PrivateRoute path="/" comp={Dashboard} exact redirect="/login" />
+        <PrivateRoute path="/" comp={Dashboard} redirect="/login" exact />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
       </Switch>

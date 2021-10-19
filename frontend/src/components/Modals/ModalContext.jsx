@@ -6,6 +6,7 @@ export const ModalContextProvider = ({ children }) => {
   const [modalData, setModalData] = useState({
     modalShow: false,
     modalType: "",
+    scData: null,
   });
 
   return (
