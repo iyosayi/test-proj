@@ -6,7 +6,6 @@ import Loader from "react-loader-spinner";
 const ApplicantsView = ({ scData }) => {
   const { data, isLoading, error } = scholarshipApplicants(scData.id);
 
-  console.log(data);
   return (
     <ModalBase>
       <div className="relative">

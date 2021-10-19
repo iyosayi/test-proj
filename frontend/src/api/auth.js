@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useHistory } from "react-router";
 
 import { setAuth } from "../utils/auth";
@@ -74,4 +74,64 @@ export const authSignup = () => {
   );
 
   return { signup: mutateAsync, isLoading, error };
+};
+
+export const updateProfile = () => {
+  const { userData, setUserData } = useContext(UserContext);
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, error, isError, isSuccess, isLoading } = useMutation(
+    async ({ bio }) => {
+      try {
+        const res = await baseAxios({
+          method: "PATCH",
+          url: "/users/me",
+          data: {
+            profile: String(bio),
+          },
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+          },
+        });
+        return res.data.data;
+      } catch (error) {
+        throw Error(error.response.data.message);
+      }
+    }
+    // {
+    //   onSuccess: () => queryClient.invalidateQueries("refreshUser"),
+    // }
+  );
+
+  return { update: mutateAsync, error, isError, isSuccess, isLoading };
+};
+
+export const refreshUser = () => {
+  const { userData, setUserData } = useContext(UserContext);
+
+  const { data, error, isLoading } = useQuery(
+    "refreshUser",
+    async () => {
+      try {
+        const res = await baseAxios({
+          method: "GET",
+          url: "/users/me",
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+          },
+        });
+        return res.data.data;
+      } catch (error) {
+        throw error;
+      }
+    },
+    {
+      onSuccess: (newData) => {
+        setUserData({ user: newData, ...userData });
+        setAuth(userData);
+      },
+    }
+  );
+
+  return { data, error, isLoading };
 };

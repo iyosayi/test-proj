@@ -17,7 +17,7 @@ const ApplyModal = ({ scData }) => {
   return (
     <ModalBase>
       <div className="flex">
-        <div className="bg-modal-infoBackground w-1/3 p-6">
+        <div className="hidden md:block bg-modal-infoBackground w-1/3 p-6">
           <h4 className="text-gray-500 mb-2">Apply To</h4>
           <div className="flex gap-2 items-center">
             <div className="w-12 h-12">
@@ -28,7 +28,12 @@ const ApplyModal = ({ scData }) => {
         </div>
         <div className="w-full p-6 space-y-3">
           <h4 className="text-sm">YOUR APPLICATION</h4>
+          <div className="md:hidden">
+            <h4 className="text-gray-500 mb-2">Applying To</h4>
+            <p className="uppercase font-bold">{scData?.name}</p>
+          </div>
           <hr />
+
           <p>{userData?.user.name}</p>
           <p className="text-sm">
             Let them know why you're a good fit for this scholarship.

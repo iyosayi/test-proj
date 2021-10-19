@@ -8,7 +8,6 @@ import SaveButton from "../../../components/SaveButton";
 const AwardedCard = ({ scData }) => {
   const { modalData, setModalData } = useContext(ModalContext);
 
-  console.log("scd", scData);
   return (
     <div className="w-full border rounded-sm flex flex-col p-4 gap-4">
       <div className="flex gap-2">
