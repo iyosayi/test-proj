@@ -1,47 +1,80 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import Loader from "react-loader-spinner";
+
+import { authSignup } from "@api/auth";
 
 const SignupForm = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
+    watch,
   } = useForm();
 
+  const { signup, isLoading, error } = authSignup();
+
+  const signupSubmit = async ({
+    firstName,
+    lastName,
+    email,
+    password,
+    donor,
+  }) => {
+    const res = await signup({ firstName, lastName, email, password, donor });
+    console.log(res);
+  };
+
   return (
-    <form onSubmit={handleSubmit()}>
+    <form onSubmit={handleSubmit(signupSubmit)}>
       <div className="flex justify-between gap-10">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-5">
           <label htmlFor="firstName">First Name</label>
           <input
             id="firstName"
-            className="h-12 mt-2 mb-7 p-2 shadow-md border border-black border-opacity-20"
+            className={`h-12 mt-2 p-2 border border-opacity-20 ${
+              errors.firstName
+                ? "shadow-error border-red-500"
+                : "shadow-md border-black"
+            }`}
             {...register("firstName", {
-              required: "Hey, we'd need your first name",
+              required: "We'd need your first name",
             })}
           />
-          {errors.firsss && errors.firsss.message}
+          <p className="text-[#cc0000]">
+            {errors.firstName && errors.firstName.message}
+          </p>
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-5">
           <label htmlFor="lastName">Last Name</label>
           <input
-            className="h-12 mt-2 mb-7 p-2 shadow-md border border-black border-opacity-20"
+            className={`h-12 mt-2 p-2 border border-opacity-20 ${
+              errors.lastName
+                ? "shadow-error border-red-500"
+                : "shadow-md border-black"
+            }`}
             id="lastName"
             {...register("lastName", {
-              required: "Hey, we'd need your last name",
+              required: "We'd need your last name",
             })}
           />
-          {errors.password && errors.password.message}
+          <p className="text-[#cc0000]">
+            {errors.lastName && errors.lastName.message}
+          </p>
         </div>
       </div>
 
       <div className="flex justify-between gap-10">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-5">
           <label htmlFor="emailInput">Email</label>
           <input
             id="emailInput"
             type="email"
-            className="h-12 mt-2 mb-7 p-2 shadow-md border border-black border-opacity-20"
+            className={`h-12 mt-2 p-2 border border-opacity-20 ${
+              errors.email
+                ? "shadow-error border-red-500"
+                : "shadow-md border-black"
+            }`}
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -51,12 +84,18 @@ const SignupForm = () => {
               },
             })}
           />
-          {errors.email && errors.email.message}
+          <p className="text-[#cc0000]">
+            {errors.email && errors.email.message}
+          </p>
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-5">
           <label htmlFor="phoneInput">Phone</label>
           <input
-            className="h-12 mt-2 mb-7 p-2 shadow-md border border-black border-opacity-20"
+            className={`h-12 mt-2 p-2 border border-opacity-20 ${
+              errors.phone
+                ? "shadow-error border-red-500"
+                : "shadow-md border-black"
+            }`}
             id="phoneInput"
             type="tel"
             inputMode="tel"
@@ -64,33 +103,61 @@ const SignupForm = () => {
               required: "Phone is required",
             })}
           />
-          {errors.phone && errors.phone.message}
+          <p className="text-[#cc0000]">
+            {errors.phone && errors.phone.message}
+          </p>
         </div>
       </div>
       <div className="flex justify-between gap-10">
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-5">
           <label htmlFor="passwordInput">Password</label>
           <input
-            className="h-12 mt-2 mb-7 p-2 shadow-md border border-black border-opacity-20"
+            className={`h-12 mt-2 p-2 border border-opacity-20 ${
+              errors.password
+                ? "shadow-error border-red-500"
+                : "shadow-md border-black"
+            }`}
             id="passwordInput"
             type="password"
             {...register("password", {
               required: "Password is required",
             })}
           />
-          {errors.password && errors.password.message}
+          <p className="text-[#cc0000]">
+            {errors.password && errors.password.message}
+          </p>
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mb-5">
           <label htmlFor="confirmInput">Confirm Password</label>
           <input
             id="confirmInput"
             type="password"
-            className="h-12 mt-2 mb-7 p-2 shadow-md border border-black border-opacity-20"
+            className={`h-12 mt-2 p-2 border border-opacity-20 ${
+              errors.confirmPass
+                ? "shadow-error border-red-500"
+                : "shadow-md border-black"
+            }`}
             {...register("confirmPass", {
               required: "Confirmation is required",
+              validate: (value) =>
+                value === watch("password") || "Passwords do not match",
             })}
           />
-          {errors.email && errors.email.message}
+          <p className="text-[#cc0000]">
+            {errors.confirmPass && errors.confirmPass.message}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 pl-1 mb-4">
+        <div>
+          <input
+            id="donorCheckbox"
+            type="checkbox"
+            className="mr-2 cursor-pointer transform scale-125"
+            {...register("donor")}
+          />
+          <label htmlFor="termsCheckbox">Join as Donor?</label>
         </div>
       </div>
 
@@ -100,22 +167,38 @@ const SignupForm = () => {
             id="termsCheckbox"
             type="checkbox"
             className="mr-2 cursor-pointer transform scale-125"
+            {...register("tos", {
+              required: "You need to confirm you agree to the ToS.",
+            })}
           />
           <label htmlFor="termsCheckbox">
             {" "}
             I agree to the{" "}
-            <Link className="text-blue-500">Terms of Service</Link> and
-            <Link className="text-blue-500"> Privacy Policy</Link>
+            <Link to="/signup" className="text-blue-500">
+              Terms of Service
+            </Link>{" "}
+            and
+            <Link to="/signup" className="text-blue-500">
+              {" "}
+              Privacy Policy
+            </Link>
           </label>
         </div>
       </div>
+      <p className="text-[#cc0000]">{errors.tos && errors.tos.message}</p>
+
+      <p className="text-[#cc0000] my-5">{error && error.toString()}</p>
 
       <div className="w-full">
         <button
           type="submit"
-          className="w-full bg-overlay mt-6 p-4 text-white hover:opacity-80 transition-all ease-in-out duration-300"
+          className="w-full flex justify-center items-center bg-overlay mt-6 p-4 text-white hover:opacity-80 transition-all ease-in-out duration-300"
         >
-          Sign Up
+          {isLoading ? (
+            <Loader type={"TailSpin"} width={24} height={24} color="white" />
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </div>
 
