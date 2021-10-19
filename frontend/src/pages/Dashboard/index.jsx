@@ -1,5 +1,5 @@
 import { getAuth } from "@utils/auth";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Header from "../../components/Header";
 import Nav from "../../components/Nav";
@@ -16,19 +16,21 @@ const Dashboard = () => {
       <Header />
       <Nav admin />
       <div className="max-w-[1800px] m-auto p-4">
-        <Route path="/" exact>
-          {!(user?.type === "student") ? (
-            <StudentDashboard />
-          ) : (
-            <DonorDashboard />
-          )}
-        </Route>
-        <Route path="/applied">
-          <Applied />
-        </Route>
-        <Route path="/my-scholarships">
-          <MyScholarships />
-        </Route>
+        <Switch>
+          <Route path="/" exact>
+            {!(user?.type === "student") ? (
+              <StudentDashboard />
+            ) : (
+              <DonorDashboard />
+            )}
+          </Route>
+          <Route path="/applied">
+            <Applied />
+          </Route>
+          <Route path="/my-scholarships">
+            <MyScholarships />
+          </Route>
+        </Switch>
       </div>
     </BrowserRouter>
   );
