@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ModalContext } from "../../../components/Modals/ModalContext";
 
-import { MdPeopleAlt, MdOutlineHideSource } from "react-icons/md";
+import { MdPeopleAlt } from "react-icons/md";
 import { MdAttachMoney } from "react-icons/md";
 import { BsExclamationTriangleFill } from "react-icons/bs";
 import SaveButton from "../../../components/SaveButton";
@@ -77,10 +77,6 @@ const ScholarshipCard = ({ applied, donor, scData }) => {
           <button className="flex items-center gap-1">
             <BsExclamationTriangleFill />
             Report
-          </button>
-          <button className="flex items-center gap-1">
-            <MdOutlineHideSource />
-            Hide
           </button>
         </div>
       </div>

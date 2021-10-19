@@ -1,15 +1,13 @@
 import { useContext } from "react";
 import { ModalContext } from "../../../components/Modals/ModalContext";
 
-import { MdPeopleAlt, MdOutlineHideSource } from "react-icons/md";
-import { AiOutlineStar } from "react-icons/ai";
+import { MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 import { BsExclamationTriangleFill } from "react-icons/bs";
 import SaveButton from "../../../components/SaveButton";
 
 const ApplicationCard = ({ applied, scData }) => {
   const { modalData, setModalData } = useContext(ModalContext);
 
-  console.log(scData);
   return (
     <div className="w-full border rounded-sm flex flex-col p-4 gap-4">
       <div className="flex gap-2">
@@ -26,17 +24,21 @@ const ApplicationCard = ({ applied, scData }) => {
             });
           }}
         >
-          <h1 className="font-bold">CareerMove</h1>
-          <p>Obtain an ACCA certification for free!</p>
+          <h1 className="font-bold">{scData.name}</h1>
+          <p>{scData.description}</p>
           <p className="flex items-center text-sm gap-1">
             <MdPeopleAlt />
-            {scData.name}
+            {scData.donor.name}
+          </p>
+          <p className="flex items-center text-sm gap-1">
+            <MdAttachMoney />
+            {scData.amount}
           </p>
         </div>
       </div>
       <div className="w-full">
         <div className="w-full border flex p-2 rounded-[4px] justify-between items-center">
-          <p>Software engineer, Server Side Engineering</p>
+          <p>{scData.tag}</p>
           <div className="border rounded border-blue-500  hover:bg-blue-500 hover:text-white">
             <button
               className={`py-1 px-3`}
@@ -60,10 +62,6 @@ const ApplicationCard = ({ applied, scData }) => {
           <button className="flex items-center gap-1">
             <BsExclamationTriangleFill />
             Report
-          </button>
-          <button className="flex items-center gap-1">
-            <MdOutlineHideSource />
-            Hide
           </button>
         </div>
       </div>

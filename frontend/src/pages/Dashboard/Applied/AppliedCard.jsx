@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { ModalContext } from "../../../components/Modals/ModalContext";
 
-import { MdPeopleAlt, MdOutlineHideSource } from "react-icons/md";
-import { AiOutlineStar } from "react-icons/ai";
+import { MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 import { BsExclamationTriangleFill } from "react-icons/bs";
 import SaveButton from "../../../components/SaveButton";
 
@@ -21,6 +20,7 @@ const AppliedCard = ({ applied, scData }) => {
             setModalData({
               modalShow: true,
               modalType: "detailView",
+              scData: scData.scholarship,
             });
           }}
         >
@@ -28,7 +28,11 @@ const AppliedCard = ({ applied, scData }) => {
           <p>{scData.scholarship.description}</p>
           <p className="flex items-center text-sm gap-1">
             <MdPeopleAlt />
-            {/* {scData.donor.name} */}
+            {scData.scholarship.donor.name}
+          </p>
+          <p className="flex items-center text-sm gap-1">
+            <MdAttachMoney />
+            {scData.scholarship.amount}
           </p>
         </div>
       </div>
@@ -70,10 +74,6 @@ const AppliedCard = ({ applied, scData }) => {
           <button className="flex items-center gap-1">
             <BsExclamationTriangleFill />
             Report
-          </button>
-          <button className="flex items-center gap-1">
-            <MdOutlineHideSource />
-            Hide
           </button>
         </div>
       </div>
