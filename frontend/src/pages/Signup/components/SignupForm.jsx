@@ -27,7 +27,7 @@ const SignupForm = () => {
 
   return (
     <form onSubmit={handleSubmit(signupSubmit)}>
-      <div className="flex justify-between gap-10">
+      <div className="flex flex-col md:flex-row justify-between md:gap-10">
         <div className="flex flex-col w-full mb-5">
           <label htmlFor="firstName">First Name</label>
           <input
@@ -64,7 +64,7 @@ const SignupForm = () => {
         </div>
       </div>
 
-      <div className="flex justify-between gap-10">
+      <div className="flex flex-col md:flex-row justify-between md:gap-10">
         <div className="flex flex-col w-full mb-5">
           <label htmlFor="emailInput">Email</label>
           <input
@@ -108,7 +108,7 @@ const SignupForm = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-between gap-10">
+      <div className="flex flex-col md:flex-row justify-between md:gap-10">
         <div className="flex flex-col w-full mb-5">
           <label htmlFor="passwordInput">Password</label>
           <input
