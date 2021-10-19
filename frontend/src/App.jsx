@@ -10,6 +10,7 @@ import { ModalContext } from "./components/Modals/ModalContext";
 import ApplyModal from "./components/Modals/ApplyModal";
 import DetailView from "./components/Modals/DetailView";
 import ContributeModal from "./components/Modals/ContributeModal";
+import AddScholarship from "./components/Modals/AddModal";
 
 const App = () => {
   const { modalData } = useContext(ModalContext);
@@ -24,6 +25,9 @@ const App = () => {
       )}
       {modalData.modalShow && modalData.modalType === "contribute" && (
         <ContributeModal scData={modalData.scData} />
+      )}
+      {modalData.modalShow && modalData.modalType === "add" && (
+        <AddScholarship />
       )}
 
       <Switch>

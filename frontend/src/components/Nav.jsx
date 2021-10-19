@@ -18,18 +18,7 @@ const Nav = ({ donor }) => {
         <SiGooglescholar className="lg:text-4xl m-auto" />
         Scholarships
       </Link>
-      {donor ? (
-        <Link
-          to="/applications"
-          role="button"
-          className={`${
-            path === "/applications" && "bg-overlay text-white"
-          } p-4 rounded-lg text-center text-sm lg:text-base`}
-        >
-          <FaInbox className="lg:text-4xl m-auto" />
-          Applications
-        </Link>
-      ) : (
+      {!donor && (
         <Link
           to="/applied"
           role="button"

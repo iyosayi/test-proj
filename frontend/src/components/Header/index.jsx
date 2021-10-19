@@ -6,9 +6,11 @@ import { MdAddBox } from "react-icons/md";
 import logo from "@assets/logo.png";
 import ProfilePopover from "./ProfilePopover";
 import { UserContext } from "../../context/user";
+import { ModalContext } from "../Modals/ModalContext";
 
 const Header = () => {
   const { userData } = useContext(UserContext);
+  const { setModalData } = useContext(ModalContext);
 
   return (
     <header className="sticky top-0 h-20 bg-header text-white px-4 py-4">
@@ -22,6 +24,12 @@ const Header = () => {
             <div
               role="button"
               className="flex items-center p-3 gap-2 rounded-full transition-all ease-in-out duration-300 hover:bg-overlay hover:text-blue-200"
+              onClick={() => {
+                setModalData({
+                  modalShow: true,
+                  modalType: "add",
+                });
+              }}
             >
               <MdAddBox className="text-3xl" />
             </div>
