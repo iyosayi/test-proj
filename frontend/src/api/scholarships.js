@@ -52,7 +52,7 @@ export const myApplications = () => {
 
 export const scholarshipApply = () => {
   const { userData } = useContext(UserContext);
-  const { invalidateQueries } = useQueryClient();
+  const queryClient = useQueryClient();
 
   const { mutateAsync, isLoading, error, isError, isSuccess } = useMutation(
     ({ note, scID }) => {
@@ -72,10 +72,10 @@ export const scholarshipApply = () => {
         console.log("message", error);
         throw error;
       }
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries("allScholarships"),
     }
-    // {
-    //   onSuccess: () => invalidateQueries("allScholarships"),
-    // }
   );
   return { apply: mutateAsync, isLoading, error, isError, isSuccess };
 };
@@ -107,10 +107,10 @@ export const scholarshipAward = () => {
 
 export const scholarshipCreate = () => {
   const { userData } = useContext(UserContext);
-  const { invalidateQueries } = useQueryClient();
+  const queryClient = useQueryClient();
 
   const { mutateAsync, isLoading, error, isError, isSuccess } = useMutation(
-    ({ description, name, amount }) => {
+    ({ description, name, amount, tag }) => {
       return scAxios({
         method: "POST",
         url: "/",
@@ -118,15 +118,15 @@ export const scholarshipCreate = () => {
           Authorization: `Bearer ${userData.token}`,
         },
         data: {
-          donor: userData.id,
           description,
           name,
-          amount,
+          tag,
+          amount: String(amount),
         },
       });
     },
     {
-      onSuccess: () => invalidateQueries("allScholarships"),
+      onSuccess: () => queryClient.invalidateQueries("allScholarships"),
     }
   );
   return { create: mutateAsync, isLoading, error, isError, isSuccess };

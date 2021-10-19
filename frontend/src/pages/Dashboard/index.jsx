@@ -7,7 +7,6 @@ import Nav from "../../components/Nav";
 import Dash from "./Dash";
 import Applied from "./Applied";
 import MyScholarships from "./MyScholarships";
-import ApplicationList from "./ApplicationList";
 
 const Dashboard = () => {
   const { userData } = useContext(UserContext);
@@ -23,9 +22,6 @@ const Dashboard = () => {
           </Route>
           <Route path="/applied">
             <Applied />
-          </Route>
-          <Route path="/applications">
-            <ApplicationList />
           </Route>
           <Route path="/my-scholarships">
             <MyScholarships />

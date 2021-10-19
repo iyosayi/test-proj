@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../../../context/user";
 
-import ApplicationCard from "../ApplicationList/ApplicationCard";
+import ApplicationCard from "./ApplicationCard";
 
 const MyScholarships = () => {
   const { userData } = useContext(UserContext);
