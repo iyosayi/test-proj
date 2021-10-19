@@ -21,6 +21,7 @@ const AwardedCard = ({ scData }) => {
             setModalData({
               modalShow: true,
               modalType: "detailView",
+              scData,
             });
           }}
         >

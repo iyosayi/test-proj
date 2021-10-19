@@ -37,6 +37,15 @@ const ProfilePopover = () => {
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="bg-gray-50 p-2">
                     <button
+                      onClick={() => {}}
+                      className="flex items-center gap-4 p-2 transition duration-150 ease-in-out rounded-md hover:text-blue-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                    >
+                      <span className="text-sm font-medium ">Profile</span>
+                      <IoMdPerson />
+                    </button>
+                  </div>
+                  <div className="bg-gray-50 p-2">
+                    <button
                       onClick={handleLogout}
                       className="flex items-center gap-4 p-2 transition duration-150 ease-in-out rounded-md hover:text-red-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                     >
