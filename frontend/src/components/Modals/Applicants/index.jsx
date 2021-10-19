@@ -1,6 +1,7 @@
 import { scholarshipApplicants } from "../../../api/scholarships";
 import ModalBase from "../ModalBase";
 import ApplicantDisclosure from "./ApplicantDisclosure";
+import Loader from "react-loader-spinner";
 
 const ApplicantsView = ({ scData }) => {
   const { data, isLoading, error } = scholarshipApplicants(scData.id);
@@ -19,7 +20,7 @@ const ApplicantsView = ({ scData }) => {
             </div>
           </div>
         </header>
-        <div className="flex p-6">
+        <div className="flex flex-col p-6">
           {isLoading ? (
             <div className="w-full h-full flex items-center justify-center">
               <Loader

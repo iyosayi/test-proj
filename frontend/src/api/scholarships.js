@@ -50,6 +50,27 @@ export const myApplications = () => {
   return { data, error, isLoading };
 };
 
+export const myAwarded = () => {
+  const { userData } = useContext(UserContext);
+
+  const { data, error, isLoading } = useQuery("myScholarships", async () => {
+    try {
+      const res = await scAxios({
+        url: `/award`,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      });
+
+      return res.data.data;
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  return { data, error, isLoading };
+};
+
 export const myScholarships = () => {
   const { userData } = useContext(UserContext);
 

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { ImBooks } from "react-icons/im";
-import { FaInbox } from "react-icons/fa";
+import { FaAward, FaInbox } from "react-icons/fa";
 import { SiGooglescholar } from "react-icons/si";
 
 const Nav = ({ donor }) => {
@@ -28,6 +28,18 @@ const Nav = ({ donor }) => {
         >
           <FaInbox className="lg:text-4xl m-auto" />
           Applied
+        </Link>
+      )}
+      {!donor && (
+        <Link
+          to="/awarded"
+          role="button"
+          className={`${
+            path === "/awarded" && "bg-overlay text-white"
+          } p-4 rounded-lg text-center text-sm lg:text-base`}
+        >
+          <FaAward className="lg:text-4xl m-auto" />
+          Awarded
         </Link>
       )}
       {donor && (

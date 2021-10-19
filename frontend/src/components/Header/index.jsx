@@ -7,6 +7,7 @@ import logo from "@assets/logo.png";
 import ProfilePopover from "./ProfilePopover";
 import { UserContext } from "../../context/user";
 import { ModalContext } from "../Modals/ModalContext";
+import NotificationPopover from "./NotificationPopover";
 
 const Header = () => {
   const { userData } = useContext(UserContext);
@@ -35,12 +36,7 @@ const Header = () => {
             </div>
           )}
 
-          <div
-            role="button"
-            className="flex items-center p-3 gap-2 rounded-full transition-all ease-in-out duration-300 hover:bg-overlay hover:text-blue-200"
-          >
-            <FaBell />
-          </div>
+          <NotificationPopover />
 
           <ProfilePopover />
         </div>
