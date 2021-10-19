@@ -43,20 +43,13 @@ const ApplicationCard = ({ applied, admin }) => {
             <button
               className={`py-1 px-3 ${applied && "cursor-default"}`}
               onClick={() => {
-                setModalData(
-                  admin
-                    ? {
-                        modalShow: true,
-                        modalType: "contribute",
-                      }
-                    : {
-                        modalShow: true,
-                        modalType: "apply",
-                      }
-                );
+                setModalData({
+                  modalShow: true,
+                  modalType: "applicants",
+                });
               }}
             >
-              {admin ? "Contribute" : applied ? "Applied" : "Apply"}
+              Applicants
             </button>
           </div>
         </div>

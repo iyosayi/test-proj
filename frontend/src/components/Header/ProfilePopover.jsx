@@ -7,7 +7,7 @@ import { UserContext } from "../../context/user";
 import { setAuth } from "../../utils/auth";
 
 const ProfilePopover = () => {
-  const { setUserData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
   const handleLogout = () => {
     setAuth(null);
     setUserData(null);
@@ -22,7 +22,7 @@ const ProfilePopover = () => {
               <div className="bg-gray-400 p-1 rounded-full">
                 <IoMdPerson />
               </div>
-              <p className="text-sm ">Andrew Glago</p>
+              <p className="text-sm ">{userData?.user.name}</p>
             </Popover.Button>
             <Transition
               as={Fragment}

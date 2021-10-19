@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../../../context/user";
 
-import ScholarshipCard from "../components/ScholarshipCard";
+import ApplicationCard from "../ApplicationList/ApplicationCard";
 
 const MyScholarships = () => {
   const { userData } = useContext(UserContext);
@@ -12,7 +12,7 @@ const MyScholarships = () => {
       <div className="w-full flex flex-col gap-4">
         {[...Array(1)].map((_, index) => {
           return (
-            <ScholarshipCard
+            <ApplicationCard
               key={index}
               admin={!!userData?.user.type === "admin"}
             />

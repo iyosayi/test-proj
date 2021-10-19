@@ -8,7 +8,6 @@ import SaveButton from "../../../components/SaveButton";
 
 const ScholarshipCard = ({ applied, donor }) => {
   const { modalData, setModalData } = useContext(ModalContext);
-  console.log(donor);
 
   return (
     <div className="w-full border rounded-sm flex flex-col p-4 gap-4">

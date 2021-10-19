@@ -20,7 +20,7 @@ const Nav = ({ donor }) => {
       </Link>
       {donor ? (
         <Link
-          to="/applied"
+          to="/applications"
           role="button"
           className={`${
             path === "/applied" && "bg-overlay text-white"

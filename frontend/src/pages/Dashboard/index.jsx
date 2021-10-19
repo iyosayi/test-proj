@@ -7,6 +7,7 @@ import Nav from "../../components/Nav";
 import Dash from "./Dash";
 import Applied from "./Applied";
 import MyScholarships from "./MyScholarships";
+import ApplicationList from "./ApplicationList";
 
 const Dashboard = () => {
   const { userData } = useContext(UserContext);
@@ -14,7 +15,7 @@ const Dashboard = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Nav admin={!!userData?.user.type === "admin"} />
+      <Nav donor={userData?.user.type === "donor"} />
       <div className="max-w-[1800px] m-auto p-4">
         <Switch>
           <Route path="/" exact>
@@ -22,6 +23,9 @@ const Dashboard = () => {
           </Route>
           <Route path="/applied">
             <Applied />
+          </Route>
+          <Route path="/applications">
+            <ApplicationList />
           </Route>
           <Route path="/my-scholarships">
             <MyScholarships />
