@@ -16,12 +16,14 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {modalData.modalShow && modalData.modalType === "apply" && <ApplyModal />}
+      {modalData.modalShow && modalData.modalType === "apply" && (
+        <ApplyModal scData={modalData.scData} />
+      )}
       {modalData.modalShow && modalData.modalType === "detailView" && (
-        <DetailView />
+        <DetailView scData={modalData.scData} />
       )}
       {modalData.modalShow && modalData.modalType === "contribute" && (
-        <ContributeModal />
+        <ContributeModal scData={modalData.scData} />
       )}
 
       <Switch>
