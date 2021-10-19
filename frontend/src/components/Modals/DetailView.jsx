@@ -1,13 +1,10 @@
 import { useContext } from "react";
-import { MdPeopleAlt } from "react-icons/md";
+import { MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 
 import ModalBase from "./ModalBase";
-import { ModalContext } from "./ModalContext";
 import SaveButton from "../SaveButton";
 
-const DetailView = ({ applied }) => {
-  const { modalData, setModalData } = useContext(ModalContext);
-
+const DetailView = ({ scData, applied }) => {
   return (
     <ModalBase>
       <div className="relative">
@@ -17,12 +14,8 @@ const DetailView = ({ applied }) => {
               <img src="https://photos.angel.co/startups/i/5001845-166baf15b842a06817010b6dc196fda3-medium_jpg.jpg?buster=1582753841" />
             </div>
             <div>
-              <h1 className="font-bold">CareerMove</h1>
-              <p>Obtain an ACCA certification for free!</p>
-              <p className="flex items-center text-sm gap-1">
-                <MdPeopleAlt />
-                11-50 Beneficiaries
-              </p>
+              <h1 className="font-bold uppercase">{scData.name}</h1>
+              <p>{scData.description}</p>
             </div>
           </div>
         </header>
@@ -34,18 +27,22 @@ const DetailView = ({ applied }) => {
             <div className="border rounded px-4 py-2 space-y-4">
               <div>
                 <b>Sponsor</b>
-                <p>CareerMove</p>
+                <p>{scData.donor.name}</p>
               </div>
               <div>
-                <b>Beneficiaries</b>
-                <p>11-50 people</p>
+                <b>Grant Worth</b>
+                <p>{scData.amount}</p>
+              </div>
+              <div>
+                <b>Tags</b>
+                <p>{scData.tag}</p>
               </div>
             </div>
           </section>
         </div>
         <div className="flex justify-between p-6">
           <SaveButton />
-          <div
+          {/* <div
             className={`border rounded-[4px] border-blue-500  hover:bg-blue-500 hover:text-white ${
               applied && "bg-blue-500 text-white"
             }`}
@@ -53,7 +50,7 @@ const DetailView = ({ applied }) => {
             <button className={`py-1 px-3 cursor-default`} onClick={() => {}}>
               Close
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </ModalBase>
