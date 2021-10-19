@@ -18,9 +18,9 @@ const Header = () => {
       <div className="max-w-[1800px] m-auto h-full flex justify-between">
         <Link to="/" className="flex h-full gap-2">
           <img src={logo} className="" />
-          <p className="self-center font-medium text-xl">Scholars</p>
+          <p className="self-center font-medium md:text-xl">Scholars</p>
         </Link>
-        <div className="flex items-center text-2xl gap-1">
+        <div className="flex items-center md:text-2xl gap-1">
           {userData?.user.type === "donor" && (
             <div
               role="button"
@@ -32,7 +32,7 @@ const Header = () => {
                 });
               }}
             >
-              <MdAddBox className="text-3xl" />
+              <MdAddBox className="md:text-3xl" />
             </div>
           )}
 

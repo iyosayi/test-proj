@@ -23,7 +23,7 @@ const DetailView = ({ scData, applied }) => {
           <section className="p-6 w-2/3">
             <p>{testDescription}</p>
           </section>
-          <section className="p-6 w-1/3">
+          <section className="py-6 md:p-6 w-1/3">
             <div className="border rounded px-4 py-2 space-y-4">
               <div>
                 <b>Sponsor</b>
