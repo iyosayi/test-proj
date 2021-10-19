@@ -11,7 +11,7 @@ const ApplyModal = ({ scData }) => {
   const { apply, error, isError, isSuccess, isLoading } = scholarshipApply();
 
   const handleApply = async () => {
-    await apply({ scID: scData.id, note });
+    await apply({ scID: scData.id, note, donorId: scData.donor.id });
   };
 
   return (
