@@ -40,6 +40,9 @@ const ContributeModal = ({ applied }) => {
                 <b>Beneficiaries</b>
                 <p>11-50 people</p>
               </div>
+              <div>
+                <b>Contribute</b>
+              </div>
             </div>
           </section>
         </div>

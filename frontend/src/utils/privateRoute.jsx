@@ -1,16 +1,15 @@
+import { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { getAuth } from "./auth";
+
+import { UserContext } from "../context/user";
 
 const PrivateRoute = ({ comp: Component, redirect, ...rest }) => {
+  const { userData } = useContext(UserContext);
   return (
     <Route
       {...rest}
       render={(props) =>
-        !getAuth()?.user?.token ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={redirect} />
-        )
+        userData?.token ? <Component {...props} /> : <Redirect to={redirect} />
       }
     />
   );

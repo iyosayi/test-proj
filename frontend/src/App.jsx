@@ -9,6 +9,7 @@ import PrivateRoute from "@utils/privateRoute";
 import { ModalContext } from "./components/Modals/ModalContext";
 import ApplyModal from "./components/Modals/ApplyModal";
 import DetailView from "./components/Modals/DetailView";
+import ContributeModal from "./components/Modals/ContributeModal";
 
 const App = () => {
   const { modalData } = useContext(ModalContext);
@@ -19,9 +20,12 @@ const App = () => {
       {modalData.modalShow && modalData.modalType === "detailView" && (
         <DetailView />
       )}
+      {modalData.modalShow && modalData.modalType === "contribute" && (
+        <ContributeModal />
+      )}
 
       <Switch>
-        <PrivateRoute path="/" comp={Dashboard} redirect="/login" />
+        <PrivateRoute path="/" comp={Dashboard} redirect="/login" exact />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
       </Switch>

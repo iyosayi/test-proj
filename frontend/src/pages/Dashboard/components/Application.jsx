@@ -6,9 +6,8 @@ import { AiOutlineStar } from "react-icons/ai";
 import { BsExclamationTriangleFill } from "react-icons/bs";
 import SaveButton from "../../../components/SaveButton";
 
-const ScholarshipCard = ({ applied, donor }) => {
+const ApplicationCard = ({ applied, admin }) => {
   const { modalData, setModalData } = useContext(ModalContext);
-  console.log(donor);
 
   return (
     <div className="w-full border rounded-sm flex flex-col p-4 gap-4">
@@ -45,7 +44,7 @@ const ScholarshipCard = ({ applied, donor }) => {
               className={`py-1 px-3 ${applied && "cursor-default"}`}
               onClick={() => {
                 setModalData(
-                  donor
+                  admin
                     ? {
                         modalShow: true,
                         modalType: "contribute",
@@ -57,7 +56,7 @@ const ScholarshipCard = ({ applied, donor }) => {
                 );
               }}
             >
-              {donor ? "Contribute" : applied ? "Applied" : "Apply"}
+              {admin ? "Contribute" : applied ? "Applied" : "Apply"}
             </button>
           </div>
         </div>
@@ -80,4 +79,4 @@ const ScholarshipCard = ({ applied, donor }) => {
   );
 };
 
-export default ScholarshipCard;
+export default ApplicationCard;

@@ -13,10 +13,8 @@ const LoginForm = () => {
 
   const { login, isLoading, error } = authLogin();
 
-  const loginSubmit = async ({ email, password, rememberMe }) => {
-    console.log(values);
-    // const res = await login(values);
-    // console.log(res);
+  const loginSubmit = async ({ email, password }) => {
+    await login({ email, password });
   };
 
   return (
@@ -61,7 +59,7 @@ const LoginForm = () => {
         </p>
       </div>
 
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <div>
           <input
             id="rememberCheckbox"
@@ -71,7 +69,7 @@ const LoginForm = () => {
           />
           <label htmlFor="rememberCheckbox">Remember me</label>
         </div>
-      </div>
+      </div> */}
 
       <p className="text-[#cc0000] my-5">{error && error.toString()}</p>
 

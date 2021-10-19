@@ -3,7 +3,7 @@ import { ImBooks } from "react-icons/im";
 import { FaInbox } from "react-icons/fa";
 import { SiGooglescholar } from "react-icons/si";
 
-const Nav = ({ admin }) => {
+const Nav = ({ donor }) => {
   const path = useLocation().pathname;
 
   return (
@@ -18,7 +18,7 @@ const Nav = ({ admin }) => {
         <SiGooglescholar className="lg:text-4xl m-auto" />
         Scholarships
       </Link>
-      {admin ? (
+      {donor ? (
         <Link
           to="/applied"
           role="button"
@@ -41,7 +41,7 @@ const Nav = ({ admin }) => {
           Applied
         </Link>
       )}
-      {admin && (
+      {donor && (
         <Link
           to="/my-scholarships"
           role="button"

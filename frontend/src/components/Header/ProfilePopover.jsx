@@ -1,10 +1,18 @@
-import { Fragment } from "react";
-
+import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { IoMdPerson } from "react-icons/io";
 import { MdOutlineLogout } from "react-icons/md";
 
+import { UserContext } from "../../context/user";
+import { setAuth } from "../../utils/auth";
+
 const ProfilePopover = () => {
+  const { setUserData } = useContext(UserContext);
+  const handleLogout = () => {
+    setAuth(null);
+    setUserData(null);
+  };
+
   return (
     <div className="w-full max-w-sm">
       <Popover className="relative">
@@ -28,7 +36,10 @@ const ProfilePopover = () => {
               <Popover.Panel className="absolute z-10 max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 text-black sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="bg-gray-50 p-2">
-                    <button className="flex items-center gap-4 p-2 transition duration-150 ease-in-out rounded-md hover:text-red-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-4 p-2 transition duration-150 ease-in-out rounded-md hover:text-red-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                    >
                       <span className="text-sm font-medium ">Logout</span>
                       <MdOutlineLogout />
                     </button>

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 import App from "./App";
 import { ModalContextProvider } from "./components/Modals/ModalContext";
+import { UserContextProvider } from "./context/user";
 
 import "./index.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -13,9 +14,11 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ModalContextProvider>
-        <App />
-      </ModalContextProvider>
+      <UserContextProvider>
+        <ModalContextProvider>
+          <App />
+        </ModalContextProvider>
+      </UserContextProvider>
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")
