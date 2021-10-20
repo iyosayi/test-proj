@@ -11,6 +11,9 @@ module.exports = {
         icon: "hsl(216deg 25% 46%)",
         header: "hsl(213deg 100% 29%)",
         button: "rgb(0 67 148)",
+        nav: {
+          hover: "hsl(213deg 66% 92%/ 0.4)",
+        },
         text: {
           header: "#1a3651",
           paragraph: "#40515b",
