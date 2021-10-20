@@ -7,27 +7,27 @@ const Nav = ({ donor }) => {
   const path = useLocation().pathname;
 
   return (
-    <nav className="fixed flex justify-center p-4 bottom-0 bg-[#f8f8fd] w-full xl:w-auto xl:top-32 xl:bottom-auto xl:flex-col">
+    <nav className="fixed flex justify-center p-4 bottom-0 w-full xl:w-auto xl:top-32 xl:bottom-auto xl:flex-col">
       <Link
         to="/"
         role="button"
         className={`${
-          path === "/" && "bg-overlay text-white"
+          path === "/" && "bg-hover text-text-primary"
         } p-4 rounded-lg text-center text-sm lg:text-base`}
       >
-        <SiGooglescholar className="lg:text-4xl m-auto" />
-        Scholarships
+        <SiGooglescholar className="text-2xl m-auto" />
+        <span className="text-xs">Scholarships</span>
       </Link>
       {!donor && (
         <Link
           to="/applied"
           role="button"
           className={`${
-            path === "/applied" && "bg-overlay text-white"
+            path === "/applied" && "bg-hover text-text-primary"
           } p-4 rounded-lg text-center text-sm lg:text-base`}
         >
-          <FaInbox className="lg:text-4xl m-auto" />
-          Applied
+          <FaInbox className="text-2xl m-auto" />
+          <span className="text-xs">Applied</span>
         </Link>
       )}
       {!donor && (
@@ -35,11 +35,11 @@ const Nav = ({ donor }) => {
           to="/awarded"
           role="button"
           className={`${
-            path === "/awarded" && "bg-overlay text-white"
+            path === "/awarded" && "bg-hover text-text-primary"
           } p-4 rounded-lg text-center text-sm lg:text-base`}
         >
-          <FaAward className="lg:text-4xl m-auto" />
-          Awarded
+          <FaAward className="text-2xl m-auto" />
+          <span className="text-xs">Awarded</span>
         </Link>
       )}
       {donor && (
@@ -47,11 +47,11 @@ const Nav = ({ donor }) => {
           to="/my-scholarships"
           role="button"
           className={`${
-            path === "/my-scholarships" && "bg-overlay text-white"
+            path === "/my-scholarships" && "bg-hover text-text-primary"
           } p-4 rounded-lg text-center text-sm lg:text-base`}
         >
-          <ImBooks className="lg:text-4xl m-auto" />
-          My Scholarships
+          <ImBooks className="text-2xl m-auto" />
+          <span className="text-xs">My Scholarships</span>
         </Link>
       )}
     </nav>

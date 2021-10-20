@@ -5,13 +5,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#0071ff",
+        primary: "hsl(212deg 100% 97%)",
         overlay: "hsl(213deg 100% 29% / 78%)",
+        hover: "hsl(213deg 66% 92%)",
+        icon: "hsl(216deg 25% 46%)",
         header: "hsl(213deg 100% 29%)",
         button: "rgb(0 67 148)",
         text: {
           header: "#1a3651",
           paragraph: "#40515b",
+          primary: "#0f6fff",
         },
         modal: {
           infoBackground: "#f2f4f7",

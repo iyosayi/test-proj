@@ -9,7 +9,7 @@ const NotificationPopover = () => {
       <Popover className="relative">
         {({ open }) => (
           <>
-            <Popover.Button className="flex items-center p-3 gap-2 rounded-full transition-all ease-in-out duration-300 hover:bg-overlay hover:text-blue-200">
+            <Popover.Button className="flex items-center p-3 gap-2 rounded-full transition-all ease-in-out duration-300 hover:bg-hover hover:text-text-primary">
               <FaBell />
             </Popover.Button>
             <Transition

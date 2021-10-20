@@ -3,10 +3,9 @@ import Loader from "react-loader-spinner";
 import { IoMdPerson } from "react-icons/io";
 
 import ModalBase from "./ModalBase";
-import { UserContext } from "../../context/user";
-import { scholarshipApply } from "@api/scholarships";
-import { refreshUser, updateProfile } from "../../api/auth";
-import { setAuth } from "../../utils/auth";
+import { UserContext } from "@context/user";
+import { updateProfile } from "@api/auth";
+import { setAuth } from "@utils/auth";
 
 const ProfileModal = ({ scData }) => {
   const { userData, setUserData } = useContext(UserContext);
