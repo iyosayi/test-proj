@@ -81,13 +81,17 @@ export const updateProfile = () => {
   const queryClient = useQueryClient();
 
   const { mutateAsync, error, isError, isSuccess, isLoading } = useMutation(
-    async ({ bio }) => {
+    async ({ bio, interests, course, graduated, abilities  }) => {
       try {
         const res = await baseAxios({
           method: "PATCH",
           url: "/users/me",
           data: {
-            profile: String(bio),
+            bio: String(bio),
+            interests: String(interests),
+            course: String(course),
+            graduated: String(graduated),
+            abilities: String(abilities),
           },
           headers: {
             Authorization: `Bearer ${userData.token}`,

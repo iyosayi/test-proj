@@ -19,9 +19,9 @@ const EditProfile = () => {
 
   const handleUpdate = async (values) => {
     console.log(values);
-    // const res = await update({ bio });
-    // setUserData({ ...userData, user: res });
-    // setAuth(userData);
+    const res = await update(values);
+    setUserData({ ...userData, user: res });
+    setAuth(userData);
   };
 
   return (
@@ -42,10 +42,9 @@ const EditProfile = () => {
           <input
             type="date"
             className="w-full border py-3 px-4"
-            {...register("gradDate")}
+            {...register("graduated")}
           />
         </div>
-
         <div>
           <p className="text-sm mb-1">What did you study?</p>
           <input
@@ -54,7 +53,6 @@ const EditProfile = () => {
             {...register("course")}
           />
         </div>
-
         <div>
           <p className="text-sm mb-1">
             Set a bio to let donors know why you're a good fit for scholarships.{" "}
@@ -65,7 +63,6 @@ const EditProfile = () => {
             placeholder="Write a description of yourself here."
           />
         </div>
-
         <div>
           <p className="text-sm mb-1">What are your interests? </p>
           <textarea
@@ -74,7 +71,6 @@ const EditProfile = () => {
             placeholder="Chess, hockey and afrobeats."
           />
         </div>
-
         <div>
           <p className="text-sm mb-1">Abilities? </p>
           <textarea

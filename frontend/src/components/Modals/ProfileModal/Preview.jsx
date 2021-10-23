@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { UserContext } from "@context/user";
+import { useContext, useState } from "react";
 
 const PreviewProfile = () => {
+  const { userData, setUserData } = useContext(UserContext);
   return (
     <div>
       <h4 className="text-sm">
@@ -11,40 +14,46 @@ const PreviewProfile = () => {
       <div className="my-4 flex flex-col gap-2">
         <div>
           <b>Bio:</b>
+          {userData?.user?.bio && (
           <p>
-            Livepeer is building the world's open video infrastructure.
-            Developers building video streaming applications can use Livepeer's
-            network to encode live streaming video with high reliability, at a
-            fraction of the price of traditional cloud providers.
+            {userData?.user?.bio}
           </p>
+          )}
         </div>
-
         <div>
           <b>Course of study:</b>
-          <p>B. Tech</p>
+          {userData?.user?.course && (
+            <p>
+              {userData?.user?.course}
+            </p>
+
+          )}
         </div>
         <div>
           <b>Graduated:</b>
-          <p>October 31st 2021</p>
+          {userData?.user?.graduated && (
+            <p>
+              {userData?.user?.graduated}
+            </p>
+          )}
         </div>
-
         <div>
           <b>Interests:</b>
-          <p> Livepeer is building the world's open video infrastructure.</p>
+          {userData?.user?.interests && (
+            <p>
+              {userData?.user?.interests}
+            </p>
+          )}
         </div>
-
         <div>
           <b>Abilities:</b>
+          {userData?.user?.abilities && (
           <p>
             {" "}
-            Livepeer is building the world's open video infrastructure.
-            Developers building video streaming applications can use Livepeer's
-            network to encode live streaming video with high reliability, at a
-            fraction of the price of traditional cloud providers. Livepeer
-            enables this by creating an open marketplace for excess GPU
-            computing power to compete to encode video, and settles payments
-            through an Ethereum blockchain based system.
+           {userData?.user?.abilities}
           </p>
+
+          )}
         </div>
         {/* <p className="md:hidden">{userData?.user.name}</p> */}
       </div>
