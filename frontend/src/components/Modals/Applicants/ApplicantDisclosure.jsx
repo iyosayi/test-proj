@@ -1,9 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import Loader from "react-loader-spinner";
 import { BsChevronUp as ChevronUpIcon } from "react-icons/bs";
-import { scholarshipAward } from "../../../api/scholarships";
+import { scholarshipAward } from "@api/scholarships";
+import { Link } from "react-router-dom";
 
-const ApplicantDisclosure = ({ applicant }) => {
+const ApplicantDisclosure = ({ applicant, setPrData }) => {
   const { award, isLoading, isSuccess } = scholarshipAward();
   const handleAward = async () => {
     if (!applicant.awarded) {
@@ -18,7 +19,9 @@ const ApplicantDisclosure = ({ applicant }) => {
           {({ open }) => (
             <>
               <Disclosure.Button className="flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-left rounded-lg hover:bg-blue-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75">
-                <span>{applicant.student.name}</span>
+                <div className="flex items-center gap-2">
+                  <span>{applicant.student.name}</span>
+                </div>
                 <div className="flex items-center gap-4">
                   {isLoading && (
                     <Loader
@@ -50,14 +53,19 @@ const ApplicantDisclosure = ({ applicant }) => {
                   />
                 </div>
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                {applicant.note}
-                {applicant?.student?.profile && (
-                  <div className="mt-4">
-                    <b className="text-black">Applicant Bio</b>
-                    <p>{String(applicant.student.profile)}</p>
-                  </div>
-                )}
+              <Disclosure.Panel className="px-4 pt-2 pb-2 text-sm text-gray-500">
+                <div className="flex justify-between">
+                  <p>{applicant.note}</p>
+                  <Link
+                    to="/preview"
+                    className="border rounded py-1 px-3 mr-9 hover:text-black"
+                    onClick={() => {
+                      setPrData(applicant);
+                    }}
+                  >
+                    Profile
+                  </Link>
+                </div>
               </Disclosure.Panel>
             </>
           )}

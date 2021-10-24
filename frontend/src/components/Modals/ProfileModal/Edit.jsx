@@ -18,7 +18,6 @@ const EditProfile = () => {
   const { update, error, isError, isSuccess, isLoading } = updateProfile();
 
   const handleUpdate = async (values) => {
-    console.log(values);
     const res = await update(values);
     setUserData({ ...userData, user: res });
     setAuth(userData);

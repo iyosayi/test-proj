@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ModalContext } from "../../../components/Modals/ModalContext";
+import { ModalContext } from "@components/Modals/ModalContext";
 
 import { MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 import { BsExclamationTriangleFill } from "react-icons/bs";
-import SaveButton from "../../../components/SaveButton";
+import SaveButton from "@components/SaveButton";
 
 const AppliedCard = ({ applied, scData }) => {
   const { modalData, setModalData } = useContext(ModalContext);
