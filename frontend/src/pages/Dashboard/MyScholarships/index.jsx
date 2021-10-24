@@ -9,7 +9,7 @@ import ApplicationCard from "./ApplicationCard";
 
 const MyScholarships = () => {
   const { userData } = useContext(UserContext);
-  const { scholarships, isLoading, error } = myScholarships();
+  const { data, isLoading, error } = myScholarships();
 
   return (
     <div className="max-w-4xl m-auto">
@@ -27,8 +27,8 @@ const MyScholarships = () => {
         ) : data.length === 0 ? (
           <div>You've not created any scholarships</div>
         ) : (
-          scholarships &&
-          scholarships.map((scData, index) => {
+          data &&
+          data.map((scData, index) => {
             return <ApplicationCard key={index} scData={scData} />;
           })
         )}

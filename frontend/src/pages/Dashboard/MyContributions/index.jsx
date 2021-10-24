@@ -13,6 +13,7 @@ const MyContributions = () => {
   return (
     <div className="max-w-4xl m-auto">
       <h1 className="text-2xl mb-8">Scholarships You've Contributed To</h1>
+      <div>You've not contributed to any scholarships</div>
       {/* <div className="w-full flex flex-col gap-4">
         {isLoading ? (
           <div className="w-full h-full flex items-center justify-center">
