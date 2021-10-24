@@ -28,7 +28,7 @@ const DetailView = ({ scData, applied }) => {
           <section className="py-6 md:p-6 w-1/3">
             <div className="border rounded px-4 py-2 space-y-4">
               <div>
-                <b>Sponsor</b>
+                <b>Creator</b>
                 <p>{scData.donor.name}</p>
               </div>
               <div>
@@ -38,6 +38,14 @@ const DetailView = ({ scData, applied }) => {
               <div>
                 <b>Tags</b>
                 <p>{scData.tag || scData?.scholarship.tag}</p>
+              </div>
+              <div>
+                <b>Donors</b>
+                <ol>
+                  <li>Andrew - 500</li>
+                  <li>Andrew - 500</li>
+                  <li>Andrew - 500</li>
+                </ol>
               </div>
             </div>
           </section>
