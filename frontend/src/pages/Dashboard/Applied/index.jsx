@@ -3,7 +3,7 @@ import Loader from "react-loader-spinner";
 import AppliedCard from "./AppliedCard";
 
 const Applied = () => {
-  const { data, error, isLoading } = myApplications();
+  const { applications, error, isLoading } = myApplications();
 
   return (
     <div className="max-w-4xl m-auto">
@@ -18,11 +18,11 @@ const Applied = () => {
               color={"#004394"}
             />
           </div>
-        ) : data.length === 0 ? (
+        ) : applications.length === 0 ? (
           <div>You've not applied to any scholarships</div>
         ) : (
-          data &&
-          data.map((scData, index) => {
+          applications &&
+          applications.map((scData, index) => {
             return <AppliedCard key={index} scData={scData} />;
           })
         )}

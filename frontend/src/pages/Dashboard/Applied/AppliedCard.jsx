@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ModalContext } from "../../../components/Modals/ModalContext";
+import { ModalContext } from "@components/Modals/ModalContext";
 
 import { MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 import { BsExclamationTriangleFill } from "react-icons/bs";
-import SaveButton from "../../../components/SaveButton";
+import SaveButton from "@components/SaveButton";
 
 const AppliedCard = ({ applied, scData }) => {
   const { modalData, setModalData } = useContext(ModalContext);
@@ -43,28 +43,7 @@ const AppliedCard = ({ applied, scData }) => {
             className={`border rounded-[4px] border-blue-500  hover:bg-blue-500 hover:text-white ${
               applied && "bg-blue-500 text-white"
             }`}
-          >
-            {/* <button
-              className={`py-1 px-3 ${applied && "cursor-default"}`}
-              onClick={() => {
-                setModalData(
-                  donor
-                    ? {
-                        modalShow: true,
-                        modalType: "contribute",
-                        scData,
-                      }
-                    : {
-                        modalShow: true,
-                        modalType: "apply",
-                        scData,
-                      }
-                );
-              }}
-            >
-              {donor ? "Contribute" : applied ? "Applied" : "Apply"}
-            </button> */}
-          </div>
+          ></div>
         </div>
       </div>
 

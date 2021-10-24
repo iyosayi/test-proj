@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { ImBooks } from "react-icons/im";
-import { FaAward, FaInbox } from "react-icons/fa";
+import { FaAward, FaDonate, FaInbox } from "react-icons/fa";
 import { SiGooglescholar } from "react-icons/si";
 
 const Nav = ({ donor }) => {
@@ -52,6 +52,18 @@ const Nav = ({ donor }) => {
         >
           <ImBooks className="text-2xl m-auto" />
           <span className="text-xs">My Scholarships</span>
+        </Link>
+      )}
+      {donor && (
+        <Link
+          to="/my-contributions"
+          role="button"
+          className={`${
+            path === "/my-contributions" && "bg-nav-hover text-text-primary"
+          } p-4 rounded-lg text-center text-sm lg:text-base hover:bg-nav-hover transition-all ease-in-out duration-300`}
+        >
+          <FaDonate className="text-2xl m-auto" />
+          <span className="text-xs">My Contributions</span>
         </Link>
       )}
     </nav>

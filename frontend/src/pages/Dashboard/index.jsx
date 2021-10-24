@@ -7,6 +7,7 @@ import Nav from "../../components/Nav";
 import Dash from "./Dash";
 import Applied from "./Applied";
 import MyScholarships from "./MyScholarships";
+import MyContributions from "./MyContributions";
 import Awarded from "./Awarded";
 
 const Dashboard = () => {
@@ -25,6 +26,9 @@ const Dashboard = () => {
           </Route>
           <Route path="/my-scholarships">
             <MyScholarships />
+          </Route>
+          <Route path="/my-contributions">
+            <MyContributions />
           </Route>
           <Route path="/awarded">
             <Awarded />

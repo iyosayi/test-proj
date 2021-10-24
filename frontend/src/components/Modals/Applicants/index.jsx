@@ -1,10 +1,15 @@
-import { scholarshipApplicants } from "../../../api/scholarships";
+import { MemoryRouter, Route } from "react-router";
+
+import { scholarshipApplicants } from "@api/scholarships";
 import ModalBase from "../ModalBase";
 import ApplicantDisclosure from "./ApplicantDisclosure";
 import Loader from "react-loader-spinner";
+import PreviewProfile from "../ProfileModal/Preview";
+import { useState } from "react";
 
 const ApplicantsView = ({ scData }) => {
-  const { data, isLoading, error } = scholarshipApplicants(scData.id);
+  const { data, isLoading } = scholarshipApplicants(scData.id);
+  const [prData, setPrData] = useState(null);
 
   return (
     <ModalBase>
@@ -21,23 +26,38 @@ const ApplicantsView = ({ scData }) => {
           </div>
         </header>
         <div className="flex flex-col p-6">
-          {isLoading ? (
-            <div className="w-full h-full flex items-center justify-center">
-              <Loader
-                width={100}
-                height={100}
-                type="TailSpin"
-                color={"#004394"}
-              />
-            </div>
-          ) : data.length === 0 ? (
-            <div>No one has applied to this scholarship yet.</div>
-          ) : (
-            data &&
-            data.map((apData, index) => {
-              return <ApplicantDisclosure key={index} applicant={apData} />;
-            })
-          )}
+          <MemoryRouter>
+            <Route path="/" exact>
+              <>
+                {isLoading ? (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Loader
+                      width={100}
+                      height={100}
+                      type="TailSpin"
+                      color={"#004394"}
+                    />
+                  </div>
+                ) : data.length === 0 ? (
+                  <div>No one has applied to this scholarship yet.</div>
+                ) : (
+                  data &&
+                  data.map((apData, index) => {
+                    return (
+                      <ApplicantDisclosure
+                        key={index}
+                        applicant={apData}
+                        setPrData={setPrData}
+                      />
+                    );
+                  })
+                )}
+              </>
+            </Route>
+            <Route path="/preview" exact>
+              <PreviewProfile prData={prData} />
+            </Route>
+          </MemoryRouter>
         </div>
       </div>
     </ModalBase>

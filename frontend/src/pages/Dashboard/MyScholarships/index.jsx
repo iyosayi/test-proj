@@ -3,6 +3,7 @@ import Loader from "react-loader-spinner";
 
 import { UserContext } from "@context/user";
 import { myScholarships } from "@api/scholarships";
+import { myApplications } from "@api/scholarships";
 
 import ApplicationCard from "./ApplicationCard";
 

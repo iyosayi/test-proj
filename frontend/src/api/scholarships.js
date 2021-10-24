@@ -26,7 +26,7 @@ export const allScholarships = () => {
     }
   });
 
-  return { data, error, isLoading };
+  return { scholarships: data, error, isLoading };
 };
 
 export const myApplications = () => {
@@ -47,7 +47,7 @@ export const myApplications = () => {
     }
   });
 
-  return { data, error, isLoading };
+  return { applications: data, error, isLoading };
 };
 
 export const myAwarded = () => {
