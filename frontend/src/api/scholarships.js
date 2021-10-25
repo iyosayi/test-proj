@@ -113,6 +113,27 @@ export const scholarshipApplicants = (scID) => {
   return { data, error, isLoading };
 };
 
+export const myContributions = () => {
+  const { userData } = useContext(UserContext);
+
+  const { data, error, isLoading } = useQuery("myContributions", async () => {
+    try {
+      const res = await scAxios({
+        url: `/donors/contributions`,
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      });
+
+      return res.data.data;
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  return { data, error, isLoading };
+};
+
 export const scholarshipApply = () => {
   const { userData } = useContext(UserContext);
   const queryClient = useQueryClient();

@@ -39,20 +39,22 @@ const ProfilePopover = () => {
               >
                 <Popover.Panel className="absolute z-10 max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 text-black sm:px-0 lg:max-w-3xl">
                   <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                    <div className="bg-gray-50 p-2">
-                      <button
-                        onClick={() => {
-                          setModalData({
-                            modalShow: true,
-                            modalType: "profile",
-                          });
-                        }}
-                        className="flex items-center gap-4 p-2 transition duration-150 ease-in-out rounded-md hover:text-blue-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      >
-                        <span className="text-sm font-medium ">Profile</span>
-                        <IoMdPerson />
-                      </button>
-                    </div>
+                    {!userData.user.type === "donor" && (
+                      <div className="bg-gray-50 p-2">
+                        <button
+                          onClick={() => {
+                            setModalData({
+                              modalShow: true,
+                              modalType: "profile",
+                            });
+                          }}
+                          className="flex items-center gap-4 p-2 transition duration-150 ease-in-out rounded-md hover:text-blue-500 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                        >
+                          <span className="text-sm font-medium ">Profile</span>
+                          <IoMdPerson />
+                        </button>
+                      </div>
+                    )}
                     <div className="bg-gray-50 p-2">
                       <button
                         onClick={handleLogout}
