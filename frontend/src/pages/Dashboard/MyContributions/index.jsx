@@ -1,20 +1,14 @@
-// import { useContext } from "react";
-// import Loader from "react-loader-spinner";
+import Loader from "react-loader-spinner";
 
-// import { UserContext } from "@context/user";
-// import { myScholarships } from "@api/scholarships";
-
-// import ApplicationCard from "./ApplicationCard";
+import { myContributions } from "@api/scholarships";
 
 const MyContributions = () => {
-  // const { userData } = useContext(UserContext);
-  // const { data, isLoading, error } = MyContributions();
+  const { data, isLoading } = myContributions();
 
   return (
     <div className="max-w-4xl m-auto">
       <h1 className="text-2xl mb-8">Scholarships You've Contributed To</h1>
-      <div>You've not contributed to any scholarships</div>
-      {/* <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-4">
         {isLoading ? (
           <div className="w-full h-full flex items-center justify-center">
             <Loader
@@ -25,14 +19,14 @@ const MyContributions = () => {
             />
           </div>
         ) : data.length === 0 ? (
-          <div>You've not created any scholarships</div>
+          <div>You've not contributed to any scholarships</div>
         ) : (
           data &&
           data.map((scData, index) => {
-            return <ApplicationCard key={index} scData={scData} />;
+            return <div>Card</div>;
           })
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
