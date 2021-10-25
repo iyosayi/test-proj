@@ -39,14 +39,14 @@ const DetailView = ({ scData, applied }) => {
                 <b>Tags</b>
                 <p>{scData.tag || scData?.scholarship.tag}</p>
               </div>
-              <div>
+              {/* <div>
                 <b>Donors</b>
                 <ol>
-                  <li>Andrew - 500</li>
-                  <li>Andrew - 500</li>
-                  <li>Andrew - 500</li>
+                  <li>King - 500</li>
+                  <li>King - 500</li>
+                  <li>King - 500</li>
                 </ol>
-              </div>
+              </div> */}
             </div>
           </section>
         </div>

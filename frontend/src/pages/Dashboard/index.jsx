@@ -15,7 +15,7 @@ const Dashboard = () => {
   return (
     <BrowserRouter>
       <Header />
-      <div className="max-w-[1800px] m-auto p-4">
+      <div className="max-w-[1800px] m-auto p-4 pb-28">
         <Nav donor={userData?.user.type === "donor"} />
         <Switch>
           <Route path="/" exact>

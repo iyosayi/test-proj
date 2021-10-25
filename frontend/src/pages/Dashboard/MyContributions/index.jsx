@@ -1,13 +1,14 @@
 import Loader from "react-loader-spinner";
 
 import { myContributions } from "@api/scholarships";
+import ContributedCard from "./ContributedCard";
 
 const MyContributions = () => {
   const { data, isLoading } = myContributions();
 
   return (
     <div className="max-w-4xl m-auto">
-      <h1 className="text-2xl mb-8">Scholarships You've Contributed To</h1>
+      <h1 className="text-2xl mb-8">Your Scholarship Contributions</h1>
       <div className="w-full flex flex-col gap-4">
         {isLoading ? (
           <div className="w-full h-full flex items-center justify-center">
@@ -23,7 +24,7 @@ const MyContributions = () => {
         ) : (
           data &&
           data.map((scData, index) => {
-            return <div>Card</div>;
+            return <ContributedCard scData={scData} key={index} />;
           })
         )}
       </div>
