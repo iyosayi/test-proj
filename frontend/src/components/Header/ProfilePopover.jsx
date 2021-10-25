@@ -39,7 +39,7 @@ const ProfilePopover = () => {
               >
                 <Popover.Panel className="absolute z-10 max-w-sm px-4 mt-3 transform -translate-x-1/2 left-1/2 text-black sm:px-0 lg:max-w-3xl">
                   <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                    {!userData.user.type === "donor" && (
+                    {!(userData.user.type === "donor") && (
                       <div className="bg-gray-50 p-2">
                         <button
                           onClick={() => {
